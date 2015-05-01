@@ -56,27 +56,25 @@ public class PlayerVisuals : BaseController
 	/// </summary>
 	private void UpdateImage()
 	{
-		/*// Calculate index
+		// Calculate index
 		int _index = (int)(Time.timeSinceLevelLoad * m_FPS) % (m_UVTileX * m_UVTileY);
-
+		
 		// split into horizontal and vertical index
 		int uIndex = 0;
 		
 		if(IsAnimating) //Make sure a key is pressed so we can animate
 			uIndex = _index % m_UVTileX;
-
+		
 		int vIndex = (int)CurDirState;
 		int hIndex = 0; //(int)CurSpriteState;
-
+		
 		int yIndex = (vIndex + ( 4 * (hIndex)));
-
+		
 		// build offset -- v coordinate is the bottom of the image in opengl so we need to invert.
 		m_offset = new Vector2 (uIndex * m_size.x, 1.0f - m_size.y - yIndex * m_size.y);
 
-		myRenderer.material.SetTextureOffset ("_MainTex", m_offset);
-		myRenderer.material.SetTextureScale ("_MainTex", m_size);*/
-		myRenderer.material.mainTexture = defaultTexture;
-		
+		myRenderer.material.mainTexture=defaultTexture;
+	
 	}
 	
 	/// <summary>

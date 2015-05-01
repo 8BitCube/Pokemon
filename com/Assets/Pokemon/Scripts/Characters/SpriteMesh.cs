@@ -26,25 +26,26 @@ public class SpriteMesh {
 
 		bool[,] alpha = new bool[Mathf.RoundToInt(size.x),Mathf.RoundToInt(size.y)];
 
-		for(int x = 0; x < Mathf.RoundToInt(size.x); x ++){
-			for(int y = 0; y < Mathf.RoundToInt(size.y); y ++){
+		for(int x = 0; x < Mathf.RoundToInt(size.x/2); x ++){
+			for(int y = 0; y < Mathf.RoundToInt(size.y/2); y ++){
 
-				if(texture.GetPixel((int)pos.x+x,(int)pos.y+y).a!=0){
-					CubeSouth(x-Mathf.RoundToInt(size.x/2),y-Mathf.RoundToInt(size.y/2),0, pos + new Vector2(x,y));
-					CubeNorth(x-Mathf.RoundToInt(size.x/2),y-Mathf.RoundToInt(size.y/2),0, pos + new Vector2(x,y));
+				if(texture.GetPixel(Mathf.RoundToInt(pos.x)+(x*2),Mathf.RoundToInt(pos.y)+(y*2)).a!=0){
+					CubeSouth(x-Mathf.RoundToInt(size.x/4),y-Mathf.RoundToInt(size.y/4),0,pos + new Vector2(x*2,y*2));
+					CubeNorth(x-Mathf.RoundToInt(size.x/4),y-Mathf.RoundToInt(size.y/4),0,pos + new Vector2(x*2,y*2));
 
-					if(texture.GetPixel((int)pos.x+x+1,(int)pos.y+y).a==0){
-						CubeEast(x-Mathf.RoundToInt(size.x/2),y-Mathf.RoundToInt(size.y/2),0, pos + new Vector2(x,y));
+					if(texture.GetPixel(Mathf.RoundToInt(pos.x)+((x+1)*2),Mathf.RoundToInt(pos.y)+(y*2)).a==0){
+						CubeEast(x-Mathf.RoundToInt(size.x/4),y-Mathf.RoundToInt(size.y/4),0,pos + new Vector2(x*2,y*2));
 					}
-					if(texture.GetPixel((int)pos.x+x-1,(int)pos.y+y).a==0){
-						CubeWest(x-Mathf.RoundToInt(size.x/2),y-Mathf.RoundToInt(size.y/2),0, pos + new Vector2(x,y));
+					if(texture.GetPixel(Mathf.RoundToInt(pos.x)+((x-1)*2),Mathf.RoundToInt(pos.y)+(y*2)).a==0){
+						CubeWest(x-Mathf.RoundToInt(size.x/4),y-Mathf.RoundToInt(size.y/4),0,pos + new Vector2(x*2,y*2));
 					}
-					if(texture.GetPixel((int)pos.x+x,(int)pos.y+y+1).a==0){
-						CubeTop(x-Mathf.RoundToInt(size.x/2),y-Mathf.RoundToInt(size.y/2),0, pos + new Vector2(x,y));
+					if(texture.GetPixel(Mathf.RoundToInt(pos.x)+(x*2),Mathf.RoundToInt(pos.y)+((y+1)*2)).a==0){
+						CubeTop(x-Mathf.RoundToInt(size.x/4),y-Mathf.RoundToInt(size.y/4),0,pos + new Vector2(x*2,y*2));
 					}
-					if(texture.GetPixel((int)pos.x+x,(int)pos.y+y-1).a==0){
-						CubeBot(x-Mathf.RoundToInt(size.x/2),y-Mathf.RoundToInt(size.y/2),0, pos + new Vector2(x,y));
+					if(texture.GetPixel(Mathf.RoundToInt(pos.x)+(x*2),Mathf.RoundToInt(pos.y)+((y-1)*2)).a==0){
+						CubeBot(x-Mathf.RoundToInt(size.x/4),y-Mathf.RoundToInt(size.y/4),0,pos + new Vector2(x*2,y*2));
 					}
+
 				}
 				
 			}
@@ -58,8 +59,8 @@ public class SpriteMesh {
 
 		Mesh tmp = new Mesh();
 		
-		for(int x = 0; x < Mathf.RoundToInt(size.x); x ++){
-			for(int y = 0; y < Mathf.RoundToInt(size.y); y ++){
+		for(int x = 0; x < Mathf.RoundToInt(size.x/2); x ++){
+			for(int y = 0; y < Mathf.RoundToInt(size.y/2); y ++){
 				
 				if(texture.GetPixel((int)pos.x+x,(int)pos.y+y).a!=0){
 					CubeSouth(x-Mathf.RoundToInt(size.x/2),y-Mathf.RoundToInt(size.y/2),0, pos + new Vector2(x,y));
@@ -73,10 +74,10 @@ public class SpriteMesh {
 		return tmp;
 	}
 
-	float scale=0.015f;
+	float scale=0.03f;
 	float pixelSize = 0.00390625f;
 
-	void CubeSouth(int x, int y,int z, Vector2 text){
+	void CubeSouth(int x, int y,float z, Vector2 text){
 		verts.Add(new Vector3 (x*scale, (y - 1)*scale, z));
 		verts.Add(new Vector3 (x*scale, y*scale, z));
 		verts.Add(new Vector3 ((x + 1)*scale, y*scale, z));
@@ -84,7 +85,7 @@ public class SpriteMesh {
 
 		Cube (text);
 	}
-	void CubeNorth(int x, int y,int z, Vector2 text){
+	void CubeNorth(int x, int y,float z, Vector2 text){
 		verts.Add(new Vector3 ((x + 1)*scale, (y - 1)*scale, z + 0.1f));
 		verts.Add(new Vector3 ((x + 1)*scale, y*scale, z + 0.1f));
 		verts.Add(new Vector3 (x*scale, y*scale, z + 0.1f));
@@ -92,7 +93,7 @@ public class SpriteMesh {
 		
 		Cube (text);
 	}
-	void CubeBot(int x, int y,int z, Vector2 text){
+	void CubeBot(int x, int y,float z, Vector2 text){
 		verts.Add(new Vector3 (x*scale,  (y - 1)*scale,  z ));
 		verts.Add(new Vector3 ((x + 1)*scale, (y - 1)*scale,  z ));
 		verts.Add(new Vector3 ((x + 1)*scale, (y - 1)*scale,  z + 0.1f));
@@ -100,7 +101,7 @@ public class SpriteMesh {
 
 		Cube (text);
 	}
-	void CubeTop(int x, int y,int z, Vector2 text){
+	void CubeTop(int x, int y,float z, Vector2 text){
 		verts.Add(new Vector3 (x*scale,  y*scale,  z + 0.1f));
 		verts.Add(new Vector3 ((x + 1)*scale, y*scale,  z + 0.1f));
 		verts.Add(new Vector3 ((x + 1)*scale, y*scale,  z ));
@@ -108,7 +109,7 @@ public class SpriteMesh {
 		
 		Cube (text);
 	}
-	void CubeWest(int x, int y,int z, Vector2 text){
+	void CubeWest(int x, int y,float z, Vector2 text){
 		verts.Add(new Vector3 (x*scale, (y - 1)*scale, z + 0.1f));
 		verts.Add(new Vector3 (x*scale, y*scale, z + 0.1f));
 		verts.Add(new Vector3 (x*scale, y*scale, z));
@@ -116,7 +117,7 @@ public class SpriteMesh {
 		
 		Cube (text);
 	}
-	void CubeEast(int x, int y,int z, Vector2 text){
+	void CubeEast(int x, int y,float z, Vector2 text){
 		verts.Add(new Vector3 ((x + 1)*scale, (y - 1)*scale, z));
 		verts.Add(new Vector3 ((x + 1)*scale, y*scale, z));
 		verts.Add(new Vector3 ((x + 1)*scale, y*scale, z + 0.1f));
