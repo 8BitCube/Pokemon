@@ -1,14 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Map\MapData.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Characters\SpriteMesh.cs">
     <Files>
-      <File FileName="Assets\Pokemon\Dispatcher\Dispatcher.cs" Line="11" Column="5" />
-      <File FileName="Assets\Pokemon\Future\Future.cs" Line="306" Column="2" />
-      <File FileName="Assets\Pokemon\GameSaveSystem\Demo\DemoGameSave.cs" Line="7" Column="48" />
-      <File FileName="Assets\Pokemon\GameSaveSystem\Demo\GameSaveSystemDemo.cs" Line="27" Column="76" />
-      <File FileName="Assets\Pokemon\Scripts\Map\MapData.cs" Line="12" Column="31" />
-      <File FileName="Assets\Pokemon\Scripts\Singletons\FadeManager.cs" Line="59" Column="3" />
-      <File FileName="Assets\Pokemon\Scripts\Characters\Player\PlayerVisuals.cs" Line="76" Column="60" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\Player\PlayerVisuals.cs" Line="41" Column="3" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\SpriteMesh.cs" Line="51" Column="4" />
+      <File FileName="F:\Users\Aaron\Projects\com\Assets\Pokemon\Scripts\Characters\Visuals\SpriteMesh.cs" Line="74" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

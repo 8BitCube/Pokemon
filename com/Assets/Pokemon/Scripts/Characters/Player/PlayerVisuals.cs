@@ -37,6 +37,8 @@ public class PlayerVisuals : BaseController
 	{
 		m_size = new Vector2 (1.0f / m_UVTileX, 1.0f / m_UVTileY);
 		spriteTransform = UIObject.transform;
+		myRenderer.GetComponent<MeshFilter>().mesh=new SpriteMesh(defaultTexture).depthMesh(new Vector2(0,0), new Vector2(64,64));
+
 	}
 
 	/// <summary>
@@ -54,7 +56,7 @@ public class PlayerVisuals : BaseController
 	/// </summary>
 	private void UpdateImage()
 	{
-		// Calculate index
+		/*// Calculate index
 		int _index = (int)(Time.timeSinceLevelLoad * m_FPS) % (m_UVTileX * m_UVTileY);
 
 		// split into horizontal and vertical index
@@ -73,7 +75,8 @@ public class PlayerVisuals : BaseController
 
 		myRenderer.material.mainTexture = defaultTexture;
 		myRenderer.material.SetTextureOffset ("_MainTex", m_offset);
-		myRenderer.material.SetTextureScale ("_MainTex", m_size);
+		myRenderer.material.SetTextureScale ("_MainTex", m_size);*/
+		
 	}
 	
 	/// <summary>
