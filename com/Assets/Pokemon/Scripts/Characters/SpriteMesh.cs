@@ -9,8 +9,7 @@ public class SpriteMesh {
 	public List<int> tris = new List<int>();
 
 	public List<Vector2> UV = new List<Vector2>();
-
-	public Mesh mainMesh = new Mesh();
+	
 	Texture2D texture;
 
 	int squareCount;
@@ -20,11 +19,9 @@ public class SpriteMesh {
 		texture=sprite;
 	}
 
+	Mesh tmp = new Mesh();
+
 	public Mesh depthMesh(Vector2 pos, Vector2 size){
-
-		Mesh tmp = new Mesh();
-
-		bool[,] alpha = new bool[Mathf.RoundToInt(size.x),Mathf.RoundToInt(size.y)];
 
 		for(int x = 0; x < Mathf.RoundToInt(size.x/2); x ++){
 			for(int y = 0; y < Mathf.RoundToInt(size.y/2); y ++){
@@ -56,8 +53,6 @@ public class SpriteMesh {
 		return tmp;
 	}
 	public Mesh mesh(Vector2 pos, Vector2 size){
-
-		Mesh tmp = new Mesh();
 		
 		for(int x = 0; x < Mathf.RoundToInt(size.x/2); x ++){
 			for(int y = 0; y < Mathf.RoundToInt(size.y/2); y ++){
@@ -74,8 +69,8 @@ public class SpriteMesh {
 		return tmp;
 	}
 
-	float scale=0.03f;
-	float pixelSize = 0.00390625f;
+	public float scale=0.03f;
+	public float pixelSize = 0.00390625f;
 
 	void CubeSouth(int x, int y,float z, Vector2 text){
 		verts.Add(new Vector3 (x*scale, (y - 1)*scale, z));

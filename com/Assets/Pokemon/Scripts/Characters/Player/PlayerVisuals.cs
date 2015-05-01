@@ -37,8 +37,6 @@ public class PlayerVisuals : BaseController
 	{
 		m_size = new Vector2 (1.0f / m_UVTileX, 1.0f / m_UVTileY);
 		spriteTransform = UIObject.transform;
-		myRenderer.GetComponent<MeshFilter>().mesh=new SpriteMesh(defaultTexture).depthMesh(new Vector2(0,0), new Vector2(64,64));
-
 	}
 
 	/// <summary>
@@ -74,6 +72,8 @@ public class PlayerVisuals : BaseController
 		m_offset = new Vector2 (uIndex * m_size.x, 1.0f - m_size.y - yIndex * m_size.y);
 
 		myRenderer.material.mainTexture=defaultTexture;
+		myRenderer.GetComponent<MeshFilter>().mesh=null;
+		myRenderer.GetComponent<MeshFilter>().mesh=new SpriteMesh(defaultTexture).depthMesh(new Vector2((uIndex)*64,(3-yIndex)*64), new Vector2(64,64));
 	
 	}
 	
