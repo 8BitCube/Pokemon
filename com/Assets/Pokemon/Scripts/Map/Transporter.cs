@@ -15,6 +15,7 @@ public class Transporter : MonoBehaviour {
 	{
 		if(Input.GetKeyDown (KeyCode.F) && !travel)
 		{			
+			WorldManager.Instance.AllowInput = false;
 			SoundManager.Instance.PlaySFX(doorSound);
 			StartCoroutine (FadeManager.Instance.Fade(nextMusic, otherSide));
 		}	

@@ -54,7 +54,6 @@
      <Compile Include="Assets\LitJson\JsonWriter.cs" />
      <Compile Include="Assets\LitJson\Lexer.cs" />
      <Compile Include="Assets\LitJson\ParserToken.cs" />
-     <Compile Include="Assets\PauseManager.cs" />
      <Compile Include="Assets\Pokemon\Dispatcher\Dispatcher.cs" />
      <Compile Include="Assets\Pokemon\Future\Future.cs" />
      <Compile Include="Assets\Pokemon\GameSaveSystem\Demo\DemoGameSave.cs" />
@@ -75,7 +74,6 @@
      <Compile Include="Assets\Pokemon\Scripts\Characters\Player\PlayerInput.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Characters\Player\PlayerParameters.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Characters\Player\PlayerVisuals.cs" />
-     <Compile Include="Assets\Pokemon\Scripts\Characters\Pokemon\Follow.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Characters\Pokemon\Pokemon.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Field Of View\FOV2DEyes.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Field Of View\FOV2DVisionCone.cs" />
@@ -86,11 +84,13 @@
      <Compile Include="Assets\Pokemon\Scripts\Singletons\FadeManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\GameManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\KeyBindings.cs" />
+     <Compile Include="Assets\Pokemon\Scripts\Singletons\PauseManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\RendererExtensions.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\Sound\SoundInfo.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\Sound\SoundManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\WorldConstants.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\WorldManager.cs" />
+     <Compile Include="Assets\Pokemon\Scripts\SpriteMesh.cs" />
      <Compile Include="Assets\Pokemon\Scripts\UI\HealthBar.cs" />
      <Compile Include="Assets\Pokemon\Scripts\UI\RPGText.cs" />
      <Compile Include="Assets\Pokemon\Scripts\UI\RotateToCamera.cs" />

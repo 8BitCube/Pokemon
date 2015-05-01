@@ -72,11 +72,4 @@ public class Player : PlayerBase
 
 		PlayerMovement.speed = CurrentParameters.Speed;
 	}
-
-	public IEnumerator YieldPlayerMovement()
-	{
-		PlayerInput.AllowInput = false;
-		yield return new WaitForSeconds(3);
-		PlayerInput.AllowInput = true;
-	}
 }

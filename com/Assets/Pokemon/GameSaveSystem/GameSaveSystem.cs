@@ -101,7 +101,7 @@ namespace SaveSystem
         /// If <c>true</c> the save will always be read from disk. If <c>false</c> the system will return a cached instance if available.
         /// </param>
         /// <returns>An <see cref="IFuture<GameSaveLoadResult<TGameSave>>" /> that can be used to track and examine the load results.</returns>
-        public static IFuture<GameSaveLoadResult<TGameSave>> Load<TGameSave>(string name, bool forceFromDisk = false)
+        public static IFuture<GameSaveLoadResult<TGameSave>> Load<TGameSave>(string name, bool forceFromDisk)
             where TGameSave : class, IGameSave, new()
         {
             ThrowIfNotInitialized();
@@ -193,18 +193,19 @@ namespace SaveSystem
             var backupIndex = 0;
             for (backupIndex = 0; !foundGoodSave && backupIndex < _settings.backupCount; backupIndex++) {
                 // Try loading the file.
-                try {
+                try 
+				{
                     var path = GetBackupSavePath(name, backupIndex);
-                    using (var stream = File.OpenRead(path)) {
-                        save.Load(stream);
-                    }
+                    using (var stream = File.OpenRead(path)) 
+						save.Load(stream);
 
                     foundGoodSave = true;
 
                     // break so we don't increment the backupIndex again
                     break;
                 }
-                catch {
+                catch 
+				{
                     save.Reset();
                 }
             }
@@ -213,44 +214,43 @@ namespace SaveSystem
             // So we need to clean up our saves to get rid of the bad ones.
 
             // We know the main save failed so we can delete that
-            if (File.Exists(mainSavePath)) {
+            if (File.Exists(mainSavePath)) 
                 File.Delete(mainSavePath);
-            }
 
             // Delete all backups newer than the one we were able to load. This might delete all of them if no saves were good.
-            for (int i = backupIndex - 1; i >= 0; i--) {
+            for (int i = backupIndex - 1; i >= 0; i--) 
+			{
                 var path = GetBackupSavePath(name, i);
-                if (File.Exists(path)) {
+                if (File.Exists(path))
                     File.Delete(path);
-                }
             }
 
-            if (foundGoodSave) {
+            if (foundGoodSave)
+			{
                 // If we did find a save, make that save our main save
                 Debug.Log("Moving backup " + GetBackupSavePath(name, backupIndex) + " to " + mainSavePath);
                 MoveFile(GetBackupSavePath(name, backupIndex), mainSavePath);
 
                 // Move up the remaining backups
-                for (int i = backupIndex; i <= _settings.backupCount; i++) {
+                for (int i = backupIndex; i <= _settings.backupCount; i++) 
+				{
                     var path1 = GetBackupSavePath(name, i);
-                    if (File.Exists(path1)) {
+                    if (File.Exists(path1))
                         File.Delete(path1);
-                    }
 
-                    if (i < _settings.backupCount) {
+                    if (i < _settings.backupCount) 
+					{
                         var path2 = GetBackupSavePath(name, i + 1);
-                        if (File.Exists(path2)) {
+                        if (File.Exists(path2))
                             MoveFile(path2, path1);
-                        }
                     }
                 }
             }
 
             // If we didn't find any good saves, throw an exception so the future will receive the error and
             // games can choose how to handle it.
-            if (!foundGoodSave) {
+            if (!foundGoodSave) 
                 throw new FileNotFoundException("No game save found with name '" + name + "'");
-            }
 
             // Return true because if we got here we know we used a backup file
             return true;
@@ -272,17 +272,20 @@ namespace SaveSystem
             var tempPath = mainSavePath + ".temp";
 
             // Start by attempting the save to a temp file
-            try {
-                using (var stream = File.Create(tempPath)) {
+            try 
+			{
+                using (var stream = File.Create(tempPath)) 
+				{
                     save.Save(stream);
                 }
             }
-            catch {
+            catch 
+			{
                 // Remove the temp file before leaving scope if saving threw an exception
-                try {
-                    if (File.Exists(tempPath)) {
+                try 
+				{
+                    if (File.Exists(tempPath)) 
                         File.Delete(tempPath);
-                    }
                 }
                 catch { }
 
@@ -292,21 +295,22 @@ namespace SaveSystem
 
             // Saving succeeded so we need to move from the temp path to the main path.
             // First up we shift down all the backup files
-            for (int i = _settings.backupCount - 2; i >= 0; i--) {
+            for (int i = _settings.backupCount - 2; i >= 0; i--) 
+			{
                 var path = GetBackupSavePath(name, i);
-                if (File.Exists(path)) {
+                if (File.Exists(path)) 
+				{
                     var nextPath = GetBackupSavePath(name, i + 1);
-                    if (File.Exists(nextPath)) {
+                    if (File.Exists(nextPath))
                         File.Delete(nextPath);
-                    }
+
                     MoveFile(path, nextPath);
                 }
             }
 
             // Then move the current main save into the first backup slot
-            if (File.Exists(mainSavePath)) {
+            if (File.Exists(mainSavePath))
                 MoveFile(mainSavePath, GetBackupSavePath(name, 0));
-            }
 
             // Then we can just move the new file into place
             MoveFile(tempPath, mainSavePath);
@@ -314,9 +318,8 @@ namespace SaveSystem
 
         private static void ThrowIfNotInitialized()
         {
-            if (!isInitialized) {
+            if (!isInitialized) 
                 throw new InvalidOperationException("You must call Initialize first!");
-            }
         }
 
         private static string GetGameSavePath(string name)

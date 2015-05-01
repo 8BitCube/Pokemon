@@ -5,19 +5,20 @@ using System.Collections;
 namespace SaveSystem
 {
     // A basic demonstration of using the game save system.
+	[AddComponentMenu("SaveSystem/Game Save System Demo")]
     public class GameSaveSystemDemo : MonoBehaviour
     {
         private DemoGameSave _gameSave;
         private bool _isLoading, _isSaving;
-        private int _dotCount = 0;
+        public int _dotCount = 0;
 
         void Start()
         {
             // Games have to Initialize the system before using it.
             GameSaveSystem.Initialize(new GameSaveSystemSettings
             {
-                companyName = "Test Company",
-                gameName = "Test Game",
+                companyName = WorldConstants.COMPANY_NAME,
+				gameName = WorldConstants.GAME_NAME,
                 useRollingBackups = true,
                 backupCount = 2
             });
@@ -31,7 +32,8 @@ namespace SaveSystem
 
         IEnumerator UpdateDots()
         {
-            while (true) {
+            while (true)
+			{
                 yield return new WaitForSeconds(0.25f);
                 _dotCount = (_dotCount + 1) % 4;
             }
@@ -40,7 +42,8 @@ namespace SaveSystem
         void DemoLoad(bool forceFromDisk)
         {
             // Don't do more than one load/save at a time
-            if (!_isLoading && !_isSaving) {
+            if (!_isLoading && !_isSaving)
+			{
                 _isLoading = true;
 
                 // Load the save and handle the results.
@@ -68,7 +71,8 @@ namespace SaveSystem
         void DemoSave()
         {
             // Don't do more than one load/save at a time
-            if (!_isLoading && !_isSaving && _gameSave != null) {
+            if (!_isLoading && !_isSaving && _gameSave != null) 
+			{
                 _isSaving = true;
 
                 // Save our game save and handle the result
@@ -82,40 +86,42 @@ namespace SaveSystem
         void OnGUI()
         {
             // Show animated status if loading or saving.
-            if (_isLoading) {
+            if (_isLoading)
                 GUILayout.Label("Loading" + new string('.', _dotCount));
-            }
-            else if (_isSaving) {
+            else if (_isSaving)
                 GUILayout.Label("Saving" + new string('.', _dotCount));
-            }
-            else {
+            else 
+			{
                 // If we have a save, show the text from it and add an option to change the text
-                if (_gameSave != null) {
+                if (_gameSave != null) 
+				{
                     GUILayout.Label("Game save text: " + _gameSave.text);
 
-                    if (GUILayout.Button("Change demo save text")) {
-                        _gameSave.text = Guid.NewGuid().ToString();
-                    }
+                    if (GUILayout.Button("Change demo save text")) 
+						_gameSave.text = Guid.NewGuid().ToString();
                 }
 
                 // Show some buttons for playing with the save
-                if (GUILayout.Button("New Save")) {
+                if (GUILayout.Button("New Save"))
                     _gameSave = new DemoGameSave();
-                }
-                if (GUILayout.Button("Load")) {
+
+                if (GUILayout.Button("Load"))
                     DemoLoad(false);
-                }
-                if (GUILayout.Button("Force Load")) {
+
+                if (GUILayout.Button("Force Load"))
                     DemoLoad(true);
-                }
-                if (GUILayout.Button("Load and Fail")) {
+                
+                if (GUILayout.Button("Load and Fail")) 
+				{
                     DemoGameSave.FailNextLoad = true;
                     DemoLoad(true);
                 }
-                if (GUILayout.Button("Save")) {
+
+                if (GUILayout.Button("Save"))
                     DemoSave();
-                }
-                if (GUILayout.Button("Save and Fail")) {
+                
+                if (GUILayout.Button("Save and Fail")) 
+				{
                     DemoGameSave.FailNextSave = true;
                     DemoSave();
                 }

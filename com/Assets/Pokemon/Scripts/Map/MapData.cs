@@ -11,8 +11,6 @@ public class MapData : MonoBehaviour
 	public TextAsset MapInfo;
 	public RootObject RootObject;
 	
-	private int[,] m_MapData;
-	
 	public void LinkMap()
 	{
 		//First we read in our map data serializing our json script
@@ -109,7 +107,6 @@ public class MapData : MonoBehaviour
 	
 	public void BuildTexture(RootObject aRootObject, int aLayer, int aTileSet)
 	{		
-		m_MapData = new int[aRootObject.layers[aLayer].width, aRootObject.layers[aLayer].height];
 		string value = aRootObject.tilesets[aTileSet].image;
 		
 		value = value.Replace(".png", "");
@@ -177,24 +174,4 @@ public class MapData : MonoBehaviour
 		
 		return tiles;
 	}
-	
-	public Color[] CombineColors(Color[] aColorA, Color[] aColorB)
-	{
-		Color[] result = new Color[aColorA.Length];
-		for(int x =0; x < aColorA.Length; x++)
-		{
-			if(aColorA[x] == null)
-				result[x] = aColorB[x];
-		}
-		
-		return result;
-	}
-	
-	/// <summary>
-	/// Gets the tile at x and y.
-	/// </summary>
-	/// <returns>The <see cref="System.Int32"/>.</returns>
-	/// <param name="x">The x coordinate.</param>
-	/// <param name="y">The y coordinate.</param>
-	private int GetTileAt(int x, int y) { return m_MapData[x,y]; }
 }	

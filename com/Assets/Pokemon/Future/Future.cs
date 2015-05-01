@@ -110,9 +110,8 @@ namespace SaveSystem
         {
             get
             {
-                if (_state != FutureState.Success) {
+                if (_state != FutureState.Success)
                     throw new InvalidOperationException("value is not available unless state is Success.");
-                }
 
                 return _value;
             }
@@ -125,9 +124,8 @@ namespace SaveSystem
         {
             get
             {
-                if (_state != FutureState.Error) {
+                if (_state != FutureState.Error)
                     throw new InvalidOperationException("error is not available unless state is Error.");
-                }
 
                 return _error;
             }
@@ -148,17 +146,15 @@ namespace SaveSystem
         /// <returns>The future so additional calls can be chained together.</returns>
         public IFuture<T> OnSuccess(FutureCallback<T> callback)
         {
-            if (_state == FutureState.Success) {
-                if (Dispatcher.isMainThread) {
+            if (_state == FutureState.Success) 
+			{
+                if (Dispatcher.isMainThread)
                     callback(this);
-                }
-                else {
+				else
                     Dispatcher.InvokeAsync(() => callback(this));
-                }
             }
-            else if (_state != FutureState.Error && !_successCallbacks.Contains(callback)) {
+            else if (_state != FutureState.Error && !_successCallbacks.Contains(callback))
                 _successCallbacks.Add(callback);
-            }
 
             return this;
         }
@@ -170,17 +166,15 @@ namespace SaveSystem
         /// <returns>The future so additional calls can be chained together.</returns>
         public IFuture<T> OnError(FutureCallback<T> callback)
         {
-            if (_state == FutureState.Error) {
-                if (Dispatcher.isMainThread) {
+            if (_state == FutureState.Error) 
+			{
+                if (Dispatcher.isMainThread) 
                     callback(this);
-                }
-                else {
+                else
                     Dispatcher.InvokeAsync(() => callback(this));
-                }
             }
-            else if (_state != FutureState.Success && !_errorCallbacks.Contains(callback)) {
+            else if (_state != FutureState.Success && !_errorCallbacks.Contains(callback))
                 _errorCallbacks.Add(callback);
-            }
 
             return this;
         }
@@ -192,21 +186,20 @@ namespace SaveSystem
         /// <returns>The future so additional calls can be chained together.</returns>
         public IFuture<T> OnComplete(FutureCallback<T> callback)
         {
-            if (_state == FutureState.Success || _state == FutureState.Error) {
-                if (Dispatcher.isMainThread) {
+            if (_state == FutureState.Success || _state == FutureState.Error) 
+			{
+                if (Dispatcher.isMainThread)
                     callback(this);
-                }
-                else {
+                else
                     Dispatcher.InvokeAsync(() => callback(this));
-                }
             }
-            else {
-                if (!_successCallbacks.Contains(callback)) {
+            else 
+			{
+                if (!_successCallbacks.Contains(callback))
                     _successCallbacks.Add(callback);
-                }
-                if (!_errorCallbacks.Contains(callback)) {
-                    _errorCallbacks.Add(callback);
-                }
+            
+                if (!_errorCallbacks.Contains(callback)) 
+					_errorCallbacks.Add(callback);
             }
 
             return this;
@@ -219,19 +212,20 @@ namespace SaveSystem
         /// <param name="func">The function that will retrieve the desired value.</param>
         public IFuture<T> Process(Func<T> func)
         {
-            if (_state != FutureState.Pending) {
+            if (_state != FutureState.Pending)
                 throw new InvalidOperationException("Cannot process a future that isn't in the Pending state.");
-            }
 
             _state = FutureState.Processing;
 
             ThreadPool.QueueUserWorkItem(_ =>
             {
-                try {
+                try 
+				{
                     // Directly call the Impl version to avoid the state validation of the public method
                     AssignImpl(func());
                 }
-                catch (Exception e) {
+                catch (Exception e) 
+				{
                     // Directly call the Impl version to avoid the state validation of the public method
                     FailImpl(e);
                 }
@@ -251,9 +245,8 @@ namespace SaveSystem
         /// <param name="value">The value to assign the future.</param>
         public void Assign(T value)
         {
-            if (_state != FutureState.Pending) {
+            if (_state != FutureState.Pending) 
                 throw new InvalidOperationException("Cannot assign a value to a future that isn't in the Pending state.");
-            }
 
             AssignImpl(value);
         }
@@ -268,9 +261,8 @@ namespace SaveSystem
         /// <param name="error">The exception to use to fail the future.</param>
         public void Fail(Exception error)
         {
-            if (_state != FutureState.Pending) {
+            if (_state != FutureState.Pending)
                 throw new InvalidOperationException("Cannot fail future that isn't in the Pending state.");
-            }
 
             FailImpl(error);
         }
@@ -295,9 +287,8 @@ namespace SaveSystem
 
         private void FlushSuccessCallbacks()
         {
-            foreach (var callback in _successCallbacks) {
+            foreach (var callback in _successCallbacks) 
                 callback(this);
-            }
 
             _successCallbacks.Clear();
             _errorCallbacks.Clear();
@@ -305,9 +296,8 @@ namespace SaveSystem
 
         private void FlushErrorCallbacks()
         {
-            foreach (var callback in _errorCallbacks) {
+            foreach (var callback in _errorCallbacks)
                 callback(this);
-            }
 
             _successCallbacks.Clear();
             _errorCallbacks.Clear();

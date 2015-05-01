@@ -8,16 +8,15 @@ public class PlayerVisuals : BaseController
 
 	public enum SpriteState { Walking, Running, Biking, Fishing, Swimming, SwimmingFishing, Diving }
 	public SpriteState CurSpriteState = SpriteState.Walking;
-		
+
 	public Texture2D defaultTexture;
 
-	public Renderer renderer;
+	public Renderer myRenderer;
 	public GameObject UIObject;
 
 	public bool IsAnimating;
 
 	private Transform spriteTransform;
-	private Transform UITransform;
 
 	public int m_UVTileX = 4;
 	public int m_UVTileY = 28;
@@ -25,19 +24,19 @@ public class PlayerVisuals : BaseController
 	
 	private Vector2 m_size;
 	private Vector2 m_offset;
-	private int lastIndex = -1;
 	
 	private Vector3 m_LeftEulerAngle =  new Vector3(0.0f, 90.0f, 0.0f);
 	private Vector3 m_BackEulerAngle =  new Vector3(0.0f, 180.0f, 0.0f);
 	private Vector3 m_RightEulerAngle = new Vector3(0.0f, 270.0f, 0.0f);
 	private Vector3 m_FaceEulerAngle =  new Vector3(0.0f, 0.0f, 0.0f);
 
-
+	/// <summary>
+	/// Start this instance.
+	/// </summary>
 	private void Start()
 	{
 		m_size = new Vector2 (1.0f / m_UVTileX, 1.0f / m_UVTileY);
 		spriteTransform = UIObject.transform;
-		UITransform = UIObject.gameObject.transform;
 	}
 
 	/// <summary>
@@ -64,21 +63,17 @@ public class PlayerVisuals : BaseController
 		if(IsAnimating) //Make sure a key is pressed so we can animate
 			uIndex = _index % m_UVTileX;
 
-
 		int vIndex = (int)CurDirState;
 		int hIndex = 0; //(int)CurSpriteState;
 
 		int yIndex = (vIndex + ( 4 * (hIndex)));
 
-		// build offset
-		// v coordinate is the bottom of the image in opengl so we need to invert.
+		// build offset -- v coordinate is the bottom of the image in opengl so we need to invert.
 		m_offset = new Vector2 (uIndex * m_size.x, 1.0f - m_size.y - yIndex * m_size.y);
 
-		renderer.material.mainTexture = defaultTexture;
-		renderer.material.SetTextureOffset ("_MainTex", m_offset);
-		renderer.material.SetTextureScale ("_MainTex", m_size);
-			
-		lastIndex = _index;
+		myRenderer.material.mainTexture = defaultTexture;
+		myRenderer.material.SetTextureOffset ("_MainTex", m_offset);
+		myRenderer.material.SetTextureScale ("_MainTex", m_size);
 	}
 	
 	/// <summary>

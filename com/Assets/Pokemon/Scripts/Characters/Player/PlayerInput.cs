@@ -4,7 +4,6 @@ using System.Collections;
 public class PlayerInput : PlayerBase
 {
 	public LayerMask mouseClickMask;
-	public bool AllowInput = true;
 
 	private Interaction targetInteraction = null;
 	private bool m_NumLockToggle = false;
@@ -29,6 +28,9 @@ public class PlayerInput : PlayerBase
 	/// </summary>
 	private void GetLocomotionInput()
 	{
+		if(WorldManager.Instance.AllowInput == false)
+			return;
+
 		// Toggle the Biking
 		if(Player.CharacterController.isGrounded && Input.GetKeyDown(KeyCode.Backspace))
 			m_BikeRideToggle = !m_BikeRideToggle;

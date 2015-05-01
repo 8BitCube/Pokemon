@@ -59,6 +59,7 @@
      <Compile Include="Assets\Pokemon\Editor\ImageEffects\SunShaftsEditor.cs" />
      <Compile Include="Assets\Pokemon\Editor\ImageEffects\TonemappingEditor.cs" />
      <Compile Include="Assets\Pokemon\Editor\ImageEffects\VignetteAndChromaticAberrationEditor.cs" />
+     <Compile Include="Assets\Pokemon\Editor\TileMapInspector.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

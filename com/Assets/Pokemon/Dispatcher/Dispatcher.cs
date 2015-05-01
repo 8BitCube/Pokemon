@@ -8,7 +8,7 @@ namespace SaveSystem
     /// <summary>
     /// A system for dispatching code to execute on the main thread.
     /// </summary>
-    [AddComponentMenu("UnityToolbag/Dispatcher")]
+    [AddComponentMenu("SaveSystem/Dispatcher")]
     public class Dispatcher : MonoBehaviour
     {
         private static Dispatcher _instance;
@@ -38,19 +38,21 @@ namespace SaveSystem
         /// <param name="action">The action to be queued.</param>
         public static void InvokeAsync(Action action)
         {
-            if (!_instanceExists) {
+            if (!_instanceExists) 
+			{
                 Debug.LogError("No Dispatcher exists in the scene. Actions will not be invoked!");
                 return;
             }
 
-            if (isMainThread) {
-                // Don't bother queuing work on the main thread; just execute it.
-                action();
-            }
-            else {
-                lock (_lockObject) {
+			// Don't bother queuing work on the main thread; just execute it.
+            if (isMainThread)
+			    action();
+            
+			else
+			{
+                lock (_lockObject) 
                     _actions.Enqueue(action);
-                }
+            
             }
         }
 
@@ -61,7 +63,8 @@ namespace SaveSystem
         /// <param name="action">The action to be queued.</param>
         public static void Invoke(Action action)
         {
-            if (!_instanceExists) {
+            if (!_instanceExists) 
+			{
                 Debug.LogError("No Dispatcher exists in the scene. Actions will not be invoked!");
                 return;
             }
@@ -82,10 +85,11 @@ namespace SaveSystem
 
         void Awake()
         {
-            if (_instance) {
+            if (_instance) 
                 DestroyImmediate(this);
-            }
-            else {
+            
+            else 
+			{
                 _instance = this;
                 _instanceExists = true;
                 _mainThread = Thread.CurrentThread;
@@ -94,7 +98,8 @@ namespace SaveSystem
 
         void OnDestroy()
         {
-            if (_instance == this) {
+            if (_instance == this) 
+			{
                 _instance = null;
                 _instanceExists = false;
             }
@@ -102,10 +107,10 @@ namespace SaveSystem
 
         void Update()
         {
-            lock (_lockObject) {
-                while (_actions.Count > 0) {
-                    _actions.Dequeue()();
-                }
+            lock (_lockObject)
+			{
+                while (_actions.Count > 0) 				
+                    _actions.Dequeue()();              
             }
         }
     }

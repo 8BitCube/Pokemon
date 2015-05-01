@@ -20,12 +20,14 @@ namespace SaveSystem
 
         public void Save(Stream stream)
         {
-            if (FailNextSave) {
+            if (FailNextSave) 
+			{
                 FailNextSave = false;
                 throw new InvalidOperationException("Intentionally failing the save.");
             }
 
-            using (var writer = new StreamWriter(stream)) {
+            using (var writer = new StreamWriter(stream)) 
+			{
                 // Write the date into the file just to prove the backup system is working as intended.
                 writer.WriteLine(DateTime.Now.ToString());
                 writer.WriteLine(text);
@@ -37,12 +39,14 @@ namespace SaveSystem
 
         public void Load(Stream stream)
         {
-            if (FailNextLoad) {
+            if (FailNextLoad) 
+			{
                 FailNextLoad = false;
                 throw new InvalidOperationException("Intentionally failing the load.");
             }
 
-            using (var reader = new StreamReader(stream)) {
+            using (var reader = new StreamReader(stream)) 
+			{
                 // Read the line containing the date; we don't really need it, though.
                 reader.ReadLine();
                 text = reader.ReadLine();

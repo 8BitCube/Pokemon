@@ -13,8 +13,6 @@ public class Wander : BaseController
 	private float pauseTimer = 0.0f;
 	private float pauseTime  = 0.0f;
 
-	private float curRotSpeed = 100f;
-
 	private Vector3 currentTargetPosition;
 
 	public void Start() 

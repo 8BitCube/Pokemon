@@ -5,7 +5,7 @@ using System.Collections;
 public class CameraController : MonoBehaviour 
 {
 	public Transform TargetLookAt;
-	public Camera camera;
+	public Camera myCamera;
 	public float Distance = 3.5f;
 	public float DistanceMin = 3.0f;
 	public float DistanceMax = 10.0f;
@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
 	/// </summary>
 	private void Start() 
 	{
-		camera = this.GetComponent<Camera> ();
+		myCamera = this.GetComponent<Camera> ();
 		Distance = Mathf.Clamp(Distance, DistanceMin, DistanceMax);
 		startDistance = Distance;
 		Reset();
@@ -139,7 +139,7 @@ public class CameraController : MonoBehaviour
 					Distance = 0.25f;
 			}
 			else
-				Distance = nearestDistance - this.camera.nearClipPlane;
+				Distance = nearestDistance - this.myCamera.nearClipPlane;
 			
 			desiredDistance = Distance;
 			distanceSmooth = DistanceResumeSmooth;
@@ -182,7 +182,7 @@ public class CameraController : MonoBehaviour
 			if(hitInfo.distance < _nearestDistance || _nearestDistance == -1) // Is it closer that previous nearDistance?
 				_nearestDistance = hitInfo.distance;
 		}
-		if(Physics.Linecast(from, to + transform.forward * -camera.nearClipPlane, out hitInfo, mask))
+		if(Physics.Linecast(from, to + transform.forward * -myCamera.nearClipPlane, out hitInfo, mask))
 		{
 			if(hitInfo.distance < _nearestDistance || _nearestDistance == -1) // Is it closer that previous nearDistance?
 				_nearestDistance = hitInfo.distance;
