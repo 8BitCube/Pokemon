@@ -1,10 +1,8 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Characters\SpriteMesh.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Characters\Player\PlayerVisuals.cs">
     <Files>
-      <File FileName="Assets\Pokemon\Scripts\Characters\Player\PlayerVisuals.cs" Line="41" Column="3" />
-      <File FileName="Assets\Pokemon\Scripts\Characters\SpriteMesh.cs" Line="51" Column="4" />
-      <File FileName="F:\Users\Aaron\Projects\com\Assets\Pokemon\Scripts\Characters\Visuals\SpriteMesh.cs" Line="74" Column="3" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\Player\PlayerVisuals.cs" Line="81" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

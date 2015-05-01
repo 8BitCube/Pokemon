@@ -73,9 +73,9 @@ public class PlayerVisuals : BaseController
 		// build offset -- v coordinate is the bottom of the image in opengl so we need to invert.
 		m_offset = new Vector2 (uIndex * m_size.x, 1.0f - m_size.y - yIndex * m_size.y);
 
-		myRenderer.material.mainTexture = defaultTexture;
 		myRenderer.material.SetTextureOffset ("_MainTex", m_offset);
 		myRenderer.material.SetTextureScale ("_MainTex", m_size);*/
+		myRenderer.material.mainTexture = defaultTexture;
 		
 	}
 	
