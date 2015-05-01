@@ -243,7 +243,6 @@ MonoBehaviour:
   mouseClickMask:
     serializedVersion: 2
     m_Bits: 512
-  AllowInput: 1
 --- !u!114 &11454670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,7 +256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurSpriteState: 0
   defaultTexture: {fileID: 2800000, guid: 9c5a2dafa6536014aab41e7699d3860e, type: 3}
-  renderer: {fileID: 2300000}
+  myRenderer: {fileID: 2300000}
   UIObject: {fileID: 100002}
   IsAnimating: 0
   m_UVTileX: 4
