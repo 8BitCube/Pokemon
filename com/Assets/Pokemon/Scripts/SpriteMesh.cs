@@ -20,7 +20,7 @@ public class SpriteMesh {
 		texture=sprite;
 	}
 
-	public Mesh depthMesh(Vector2 text, Vector2 size){
+	public Mesh depthMesh(Vector2 pos, Vector2 size){
 
 		Mesh tmp = new Mesh();
 
@@ -38,7 +38,7 @@ public class SpriteMesh {
 
 		return tmp;
 	}
-	public Mesh mesh(Vector2 text, Vector2 size){
+	public Mesh mesh(Vector2 pos, Vector2 size){
 
 		Mesh tmp = new Mesh();
 		
