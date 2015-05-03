@@ -5,7 +5,6 @@ public class PlayerInput : PlayerBase
 {
 	public LayerMask mouseClickMask;
 
-	private Interaction targetInteraction = null;
 	private bool m_NumLockToggle = false;
 	private bool m_RunToggle = false;
 	private bool m_BikeRideToggle = false;
@@ -28,9 +27,6 @@ public class PlayerInput : PlayerBase
 	/// </summary>
 	private void GetLocomotionInput()
 	{
-		if(WorldManager.Instance.AllowInput == false)
-			return;
-
 		// Toggle the Biking
 		if(Player.CharacterController.isGrounded && Input.GetKeyDown(KeyCode.Backspace))
 			m_BikeRideToggle = !m_BikeRideToggle;
@@ -127,9 +123,6 @@ public class PlayerInput : PlayerBase
 	{
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
-			//Turn off our old object
-			if(targetInteraction != null)
-				targetInteraction.Deactivate();
 		}
 
 		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
@@ -145,20 +138,7 @@ public class PlayerInput : PlayerBase
 		
 		if(_hit) 
 		{
-			//We cannot select ourself
-			if(_hitInfo.collider.gameObject.GetComponent<Interaction>() == Player.GetComponent<Interaction>())
-				return;
-			
-			//if we have clicked a new object
-			if(targetInteraction != _hitInfo.collider.gameObject.GetComponent<Interaction>())
-			{
-				//Turn off our old object
-				//if(targetInteraction != null)
-					//targetInteraction.Deactivate();
-			}
-			
-			targetInteraction = _hitInfo.collider.gameObject.GetComponent<Interaction>();
-			targetInteraction.Activate();
+
 		}
 	}
 }

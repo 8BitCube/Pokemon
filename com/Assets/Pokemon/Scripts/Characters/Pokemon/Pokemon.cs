@@ -4,8 +4,7 @@ using System.Collections;
 public class Pokemon : PlayerBase
 {
 	public CharacterController CharacterController;
-	public Renderer SpriteRenderer;
-		
+	
 	private float m_Value;
 	
 	private void Start()
@@ -15,7 +14,7 @@ public class Pokemon : PlayerBase
 		
 		if(CharacterController == null)
 			CharacterController = GetComponent<CharacterController>();
-
+		
 		PlayerVisuals.IsAnimating = true;
 	}
 }

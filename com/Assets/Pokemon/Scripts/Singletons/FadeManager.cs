@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 /// <summary>
@@ -69,8 +69,7 @@ public class FadeManager : MonoBehaviour
 			yield return null;
 		}
 		
-		WorldManager.Instance.Player.transform.position = newTransform.position;
-		WorldManager.Instance.AllowInput = true;
+		GameManager.Instance.Player.transform.position = newTransform.position;
 
 		//Start Fading Audio In to previous volume.
 		while(_alphaFadeValue > 0f)
@@ -110,8 +109,7 @@ public class FadeManager : MonoBehaviour
 			yield return null;
 		}
 		
-		WorldManager.Instance.Player.transform.position = newTransform.position;		
-		WorldManager.Instance.AllowInput = true;
+		GameManager.Instance.Player.transform.position = newTransform.position;
 		
 		//Switch the audio clip and play it
 		SoundManager.Instance.musicSource.GetComponent<AudioSource>().clip = aMusic.clip;

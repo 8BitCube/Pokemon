@@ -13,11 +13,30 @@ public class Player : PlayerBase
 	public PlayerParameters PlayerParameters { get; set; }	
 	public PlayerParameters CurrentParameters;
 
-	private void Start()
+	private void Awake()
 	{
 		//Ignor collisions with other characters
 		Physics.IgnoreLayerCollision (this.gameObject.layer, this.gameObject.layer);
 		UpdateToNewParameters (PlayerMovementType.Biking);
+		
+		DataManager.onLoad += this.Load;
+		DataManager.onSave += this.Save;
+	}
+
+	public void Load()
+	{
+		Debug.Log ("Fdsa");
+		Player.transform.position = new Vector3(DataManager.playerData.PlayerPos.x, 
+		                                        DataManager.playerData.PlayerPos.y, 
+		                                        DataManager.playerData.PlayerPos.z);
+	}
+	
+	public void Save()
+	{
+		Debug.Log ("SAVED PLAYER POS");
+		DataManager.playerData.PlayerPos.x = Player.transform.position.x;
+		DataManager.playerData.PlayerPos.y = Player.transform.position.y;
+		DataManager.playerData.PlayerPos.z = Player.transform.position.z;
 	}
 
 	public void Update()
