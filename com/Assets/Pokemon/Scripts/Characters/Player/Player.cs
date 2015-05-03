@@ -25,7 +25,6 @@ public class Player : PlayerBase
 
 	public void Load()
 	{
-		Debug.Log ("Fdsa");
 		Player.transform.position = new Vector3(DataManager.playerData.PlayerPos.x, 
 		                                        DataManager.playerData.PlayerPos.y, 
 		                                        DataManager.playerData.PlayerPos.z);

@@ -15,7 +15,6 @@ public class DataManager
 
 	public static void Load ()
 	{
-		Debug.Log ("LOADING");
 		if (onLoad != null)
 			onLoad ();
 	}

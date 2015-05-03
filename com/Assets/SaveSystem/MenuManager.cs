@@ -14,11 +14,13 @@ public class MenuManager : MonoBehaviour
 	{
 		for(int x = 0; x < LevelButtons.Length; x++)
 		{			
+			LevelButtons[x].interactable = false;
 			LevelButtons[x].GetComponentInChildren<Text>().text = "New Game";
 		}
 
 		for(int x = 0; x < DataManager.gameData.Saves.Length; x++)
 		{
+			LevelButtons[x].interactable = true;
 			LevelButtons[x].GetComponentInChildren<Text>().text = DataManager.gameData.Saves[x];
 			LevelButtons[x].GetComponent<LevelButton>().saveDest = DataManager.gameData.Saves[x];
 		}

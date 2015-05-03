@@ -41,10 +41,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 408184}
   - 143: {fileID: 14308178}
-  - 114: {fileID: 11408186}
   - 114: {fileID: 11408184}
   - 114: {fileID: 11408182}
-  - 114: {fileID: 11408180}
   m_Layer: 9
   m_Name: Pokemon
   m_TagString: Untagged
@@ -270,25 +268,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139900}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &11408180
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92693149dca1b4341bdf9c619e6ff1a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rpgText: {fileID: 0}
-  Text: SAURRR!!!
-  sfx:
-    clip: {fileID: 8300000, guid: d9c6a7fcdb082da49b5959935fd7a5d8, type: 3}
-    isLooping: 0
-    numOfSamples: 0
-    loopStartSample: 0
-  isActive: 0
 --- !u!114 &11408182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -330,19 +309,6 @@ MonoBehaviour:
   jumpSpeed: 6
   terminalVelocity: 20
   rotationSpeed: 5
---- !u!114 &11408186
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 108184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6617a06b0cf37841b303010c966c25a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CharacterController: {fileID: 14308178}
-  SpriteRenderer: {fileID: 2308178}
 --- !u!114 &11408194
 MonoBehaviour:
   m_ObjectHideFlags: 1

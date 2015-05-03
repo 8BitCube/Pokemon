@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-[ExecuteInEditMode]
+
 public class PlayerVisuals : BaseController 
 {
 	public enum DirectionState { Down, Left, Right, Up }
