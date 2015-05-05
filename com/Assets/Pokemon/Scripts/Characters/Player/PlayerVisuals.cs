@@ -36,10 +36,14 @@ public class PlayerVisuals : BaseController
 	{
 		spriteTransform = UIObject.transform;
 
-		
 		myRenderer.sharedMaterial.mainTexture=defaultTexture;
+
+		if(sMesh==null)
+			sMesh = new SpriteMesh(defaultTexture);
+
+		sMesh.downScale=2;
+
 		myRenderer.GetComponent<MeshFilter>().mesh=null;
-		sMesh = new SpriteMesh (defaultTexture);
 		myRenderer.GetComponent<MeshFilter> ().mesh = sMesh.depthMesh(new Vector2((3)*64,(3-3)*64), new Vector2(64,64));
 	}
 
@@ -56,8 +60,14 @@ public class PlayerVisuals : BaseController
 	/// <summary>
 	/// Updates the image.
 	/// </summary>
-	private void UpdateImage()
+	public void UpdateImage()
 	{
+		if(sMesh==null){
+			sMesh = new SpriteMesh(defaultTexture);
+		}
+		if(sMesh.texture!=defaultTexture){
+			sMesh.texture=defaultTexture;
+		}
 		// Calculate index
 		int _index = (int)(Time.timeSinceLevelLoad * m_FPS) % (m_UVTileX * m_UVTileY);
 		
