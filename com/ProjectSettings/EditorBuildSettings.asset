@@ -9,3 +9,7 @@ EditorBuildSettings:
     path: Assets/Pokemon/Scenes/Menu.unity
   - enabled: 1
     path: Assets/Pokemon/Scenes/demo.unity
+  - enabled: 1
+    path: Assets/Pokemon/Scenes/LogoScreen.unity
+  - enabled: 1
+    path: Assets/Pokemon/Scenes/loadDemo.unity

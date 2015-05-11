@@ -36,7 +36,6 @@ public class PlayerVisuals : BaseController
 	{
 		spriteTransform = UIObject.transform;
 
-		
 		myRenderer.sharedMaterial.mainTexture=defaultTexture;
 		myRenderer.GetComponent<MeshFilter>().mesh=null;
 		sMesh = new SpriteMesh (defaultTexture);
@@ -60,16 +59,16 @@ public class PlayerVisuals : BaseController
 	{
 		// Calculate index
 		int _index = (int)(Time.timeSinceLevelLoad * m_FPS) % (m_UVTileX * m_UVTileY);
-		
+	
 		// split into horizontal and vertical index
 		int uIndex = 0;
 		
-		if(IsAnimating) //Make sure a key is pressed so we can animate
+		if(IsAnimating) 
 			uIndex = _index % m_UVTileX;
 		
 		int vIndex = (int)CurDirState;
 		int hIndex = 0; //(int)CurSpriteState;
-		
+			
 		int yIndex = (vIndex + ( 4 * (hIndex)));
 
 		myRenderer.sharedMaterial.mainTexture=defaultTexture;

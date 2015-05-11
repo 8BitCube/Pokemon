@@ -23,19 +23,24 @@ public class Player : PlayerBase
 		DataManager.onSave += this.Save;
 	}
 
+	public void OnDestroy()
+	{
+		DataManager.onLoad -= this.Load;
+		DataManager.onSave -= this.Save;
+	}
+
 	public void Load()
 	{
-		Player.transform.position = new Vector3(DataManager.playerData.PlayerPos.x, 
-		                                        DataManager.playerData.PlayerPos.y, 
-		                                        DataManager.playerData.PlayerPos.z);
+		GameManager.Instance.Player.transform.position = new Vector3( DataManager.playerData.PlayerPos.x, 
+		                                  DataManager.playerData.PlayerPos.y, 
+		                                  DataManager.playerData.PlayerPos.z);
 	}
 	
 	public void Save()
 	{
-		Debug.Log ("SAVED PLAYER POS");
-		DataManager.playerData.PlayerPos.x = Player.transform.position.x;
-		DataManager.playerData.PlayerPos.y = Player.transform.position.y;
-		DataManager.playerData.PlayerPos.z = Player.transform.position.z;
+		DataManager.playerData.PlayerPos.x = GameManager.Instance.Player.transform.position.x;
+		DataManager.playerData.PlayerPos.y = GameManager.Instance.Player.transform.position.y;
+		DataManager.playerData.PlayerPos.z = GameManager.Instance.Player.transform.position.z;
 	}
 
 	public void Update()

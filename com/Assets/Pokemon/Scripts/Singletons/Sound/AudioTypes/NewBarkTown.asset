@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c68b5bc43e848448918b816aa0a86e, type: 3}
+  m_Name: NewBarkTown
+  m_EditorClassIdentifier: 
+  Name: New Bark Town (GB Sounds)
+  clip: {fileID: 8300000, guid: eca885a5592f8954c8c7703f2be0e845, type: 3}
+  Channels: 0
+  IsLooped: 1
+  SampleRate: 44100
+  LoopStartSample: 57344
+  NumSamples: 1706730
+  DataOffset: 1344
+  NumBlocks: 120
+  BlockSize: 8192
+  BitPerSample: 4

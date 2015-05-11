@@ -1,10 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Motor : BaseController 
 {
 	public CharacterController Controller;
-	public SoundInfo jumpSound;
+	public AudioClip jumpSound;
 
 	public float speed = 3;
 	private float m_RotationSpeed = 50;
@@ -88,7 +88,7 @@ public class Motor : BaseController
 		if(Controller.isGrounded)
 		{
 			VerticalVelocity = jumpSpeed;
-			if(jumpSound.clip)
+			if(jumpSound)
 				SoundManager.Instance.PlaySFX(jumpSound);
 
 			return true;

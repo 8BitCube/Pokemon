@@ -1,18 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SoundManager : MonoBehaviour 
 {
 	public static SoundManager Instance = null;     //Allows other scripts to call functions from SoundManager. 
 
-	public SoundInfo music;
-	public SoundInfo sfx;
+	public AudioInformation music;
+	public AudioInformation sfx;
 
 	public AudioSource musicSource;
 	public AudioSource sfxSource;
-
-	public float lowPitchRange = .95f;              //The lowest a sound effect will be randomly pitched.
-	public float highPitchRange = 1.05f;            //The highest a sound effect will be randomly pitched.
 
 	void Awake ()
 	{
@@ -22,29 +19,48 @@ public class SoundManager : MonoBehaviour
 		else if (Instance != this)
 			Destroy (gameObject);
 
-		//Set SoundManager to DontDestroyOnLoad so that it won't be destroyed when reloading our scene.
-		DontDestroyOnLoad (gameObject);
+		DataManager.onLoad += this.Load;
+		DataManager.onSave += this.Save;
 
 		musicSource.GetComponent<AudioSource>().clip = music.clip;
 		musicSource.GetComponent<AudioSource>().Play();
 	}
 
-	void Update()
+	public void OnDestroy()
 	{
-		if(music.isLooping)
+		DataManager.onLoad -= this.Load;
+		DataManager.onSave -= this.Save;
+	}
+
+	public void Load()
+	{
+		musicSource.volume = DataManager.globalData.MusicVolume;
+		sfxSource.volume = DataManager.globalData.SFXVolume;
+	}
+	
+	public void Save()
+	{
+		DataManager.globalData.MusicVolume = musicSource.volume;
+		DataManager.globalData.SFXVolume = sfxSource.volume;
+	}
+
+	void LateUpdate()
+	{
+		if(music.IsLooped)
 		{
-			if(musicSource.GetComponent<AudioSource>().timeSamples == music.numOfSamples)
+			Debug.Log(music.NumSamples);
+			if(musicSource.GetComponent<AudioSource>().timeSamples >= music.NumSamples)
 			{
-				musicSource.GetComponent<AudioSource>().timeSamples = 57344;
+				musicSource.GetComponent<AudioSource>().timeSamples = music.LoopStartSample;
 				musicSource.GetComponent<AudioSource>().Play();
 			}
 		}
 	}
 
-	public void PlaySFX(SoundInfo aSFX)
+	public void PlaySFX(AudioClip aSFX)
 	{
 		sfxSource.GetComponent<AudioSource>().Stop();
-		sfxSource.GetComponent<AudioSource>().clip = aSFX.clip;
+		sfxSource.GetComponent<AudioSource>().clip = aSFX;
 		sfxSource.GetComponent<AudioSource>().Play ();
 	}
 }
