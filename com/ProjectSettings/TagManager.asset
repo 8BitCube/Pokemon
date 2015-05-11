@@ -14,6 +14,10 @@ TagManager:
   - 
   - 
   - Solid
+<<<<<<< HEAD
+=======
+  - SpawnBattle
+>>>>>>> d5fae4acf243a20e3365e028b9f791c7d82381d6
   - Character
   - 
   - 
@@ -36,7 +40,10 @@ TagManager:
   - 
   - 
   - 
+<<<<<<< HEAD
   - 
+=======
+>>>>>>> d5fae4acf243a20e3365e028b9f791c7d82381d6
   m_SortingLayers:
   - name: Default
     uniqueID: 0

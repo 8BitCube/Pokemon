@@ -1,10 +1,22 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\UI\UIElementManager.cs">
     <Files>
       <File FileName="Assets\Pokemon\Scripts\Singletons\GameManager.cs" Line="86" Column="54" />
       <File FileName="Assets\Pokemon\Scripts\UI\FadeManager.cs" Line="57" Column="75" />
       <File FileName="Assets\Pokemon\Scripts\UI\UIElementManager.cs" Line="12" Column="14" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Map\SpawnArea.cs">
+    <Files>
+      <File FileName="Assets\Pokemon\Scripts\Map\Battles.cs" Line="1" Column="1" />
+      <File FileName="Assets\Pokemon\Scripts\Map\SpawnArea.cs" Line="30" Column="4" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\Pokemon\PokemonDatabase.cs" Line="1" Column="1" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\Pokemon\Pokemon.cs" Line="1" Column="1" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\Player\PlayerVisuals.cs" Line="1" Column="1" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\SpriteMesh.cs" Line="1" Column="1" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\SpriteMeshRenderer.cs" Line="1" Column="1" />
+>>>>>>> d5fae4acf243a20e3365e028b9f791c7d82381d6
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

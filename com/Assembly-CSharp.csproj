@@ -39,10 +39,17 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
+<<<<<<< HEAD
 	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
 	  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+=======
+	  <HintPath>F:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>F:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+>>>>>>> d5fae4acf243a20e3365e028b9f791c7d82381d6
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -65,13 +72,18 @@
      <Compile Include="Assets\Pokemon\Scripts\Characters\Player\PlayerInput.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Characters\Player\PlayerParameters.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Characters\Player\PlayerVisuals.cs" />
+     <Compile Include="Assets\Pokemon\Scripts\Characters\Pokemon\CharacterStats.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Characters\Pokemon\Pokemon.cs" />
+     <Compile Include="Assets\Pokemon\Scripts\Characters\Pokemon\PokemonDatabase.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Characters\SpriteMesh.cs" />
+     <Compile Include="Assets\Pokemon\Scripts\Characters\SpriteMeshRenderer.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Field Of View\FOV2DEyes.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Field Of View\FOV2DVisionCone.cs" />
+     <Compile Include="Assets\Pokemon\Scripts\Map\Battles.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Map\MapData.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Map\MappingManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Map\RootObject.cs" />
+     <Compile Include="Assets\Pokemon\Scripts\Map\SpawnArea.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Map\Transporter.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\GameManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\LogoManager.cs" />
@@ -176,10 +188,14 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="UnityEngine.UI">
+<<<<<<< HEAD
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iossupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+=======
+ <HintPath>F:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+>>>>>>> d5fae4acf243a20e3365e028b9f791c7d82381d6
  </Reference>
   </ItemGroup>
   <ItemGroup>
