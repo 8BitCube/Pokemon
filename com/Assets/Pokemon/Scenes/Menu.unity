@@ -2257,8 +2257,6 @@ MonoBehaviour:
   - {fileID: 1699182357}
   - {fileID: 365992652}
   - {fileID: 2052802172}
-  LevelButton: {fileID: 0}
-  LevelButtonParent: {fileID: 848028983}
 --- !u!225 &1461433943
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2348,7 +2346,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1695335676}
-  - 114: {fileID: 1695335677}
   m_Layer: 0
   m_Name: _Master
   m_TagString: Untagged
@@ -2368,17 +2365,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &1695335677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1695335675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3734a3622a130440be368231e18c73c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1699182354
 GameObject:
   m_ObjectHideFlags: 0

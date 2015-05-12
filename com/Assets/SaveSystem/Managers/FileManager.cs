@@ -2,52 +2,64 @@ using UnityEngine;
 using System.Collections;
 using System.IO;
 
-public class FileManager : MonoBehaviour 
+public class FileManager 
 {
-	public static FileManager Instance;
-	// Use this for initialization
-	void Awake () 
-	{
-		if(Instance == null)
-			Instance = this;
+	public void BuildSaveStructure()
+	{		
+		BuildDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_DIR);
+		BuildDirectory (Application.dataPath + WorldConstants.GLOBAL_INFO_DIR);
 
-		//File our folder structor
-		CheckDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_DIR);
-		CheckDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "/Backup");
-		CheckDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "/GlobalInformation");
-		CheckDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_1_DIR);
-		CheckDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_2_DIR);
-		CheckDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_3_DIR);
-		CheckDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_4_DIR);
+		BuildGlobalData ();
 
-		if(CheckFileExsist(Application.dataPath + WorldConstants.GLOBAL_INFO_FILE))
-			DataManager.globalData = Serializer.Load<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_FILE);
-		else
-			BuildGlobalData();
-
-		for(int x = 0; x < 4; x++)
+		for(int x = 0; x < DataManager.globalData.SavePaths.Length; x++)
 		{
-			DataManager.globalData.Saves [x] = Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "Save " + (x+1) + "/Player.dat";
+			string _path = Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "/Save " + x;
+			BuildDirectory (_path);
+
+			DataManager.globalData.SavePaths[x] = _path + WorldConstants.PLAYER_INFO_FILE;
+			DataManager.globalData.SaveNames[x] = x.ToString();
+		}
+
+		//For Testing builds.  Save one will always be the default build.
+		DataManager.globalData.selectedSave = DataManager.globalData.SavePaths [0];
+	}
+
+	public void BuildGlobalData()
+	{
+		string _path = Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE;
+
+		if (CheckFileExsist (_path)) 
+			DataManager.globalData = Serializer.Load<GlobalData>(_path);
+		else
+		{
+			DataManager.globalData = new GlobalData ();
+			DataManager.globalData.SavePaths = new string[4];
+			DataManager.globalData.SaveNames = new string[4];
+			DataManager.globalData.MusicVolume = WorldConstants.DEFAULT_MUSIC_V;
+			DataManager.globalData.SFXVolume = WorldConstants.DEFAULT_SFX_V;
+
+			Serializer.Save<GlobalData>(_path, DataManager.globalData);
 		}
 	}
 
-	private void BuildGlobalData()
+	public void BuildPlayerData(int aSaveValue)
 	{
-		DataManager.globalData = new GlobalData ();
-		Serializer.Save<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_FILE, DataManager.globalData);
+		string _path = Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "/Save " + aSaveValue;
 
-		// This Chucnk of code will build a "New Game" Based on if the files were found.
-		for(int x = 0; x < 4; x++)
+		if (File.Exists (_path + WorldConstants.PLAYER_INFO_FILE))
+			DataManager.playerData = Serializer.Load<PlayerData>(_path + WorldConstants.PLAYER_INFO_FILE);
+		else
 		{
-			string _path = Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "Save " + (x+1) + "/Player.dat";
-
-			if(!CheckFileExsist(_path))
-			{
-				DataManager.playerData = new PlayerData();
-				Serializer.Save<PlayerData>(_path, DataManager.playerData);
-				DataManager.globalData.SaveNames [x] = "New Game";
-			}
+			Debug.Log("Built a new Player Data file");
+			DataManager.playerData = new PlayerData ();
+			DataManager.playerData.PlayerPos.x = WorldConstants.DEFAULT_POS_X;
+			DataManager.playerData.PlayerPos.y = WorldConstants.DEFAULT_POS_Y;
+			DataManager.playerData.PlayerPos.z = WorldConstants.DEFAULT_POS_Z;
+			
+			Serializer.Save<PlayerData>(_path + WorldConstants.PLAYER_INFO_FILE, DataManager.playerData);
 		}
+
+		DataManager.globalData.SavePaths[aSaveValue] = _path + WorldConstants.PLAYER_INFO_FILE;
 	}
 
 	private void DeleteDirectory(string sourcePath)
@@ -58,9 +70,7 @@ public class FileManager : MonoBehaviour
 	private static void CopyDirectory(string sourcePath, string destPath)
 	{
 		if (!Directory.Exists(destPath))
-		{
 			Directory.CreateDirectory(destPath);
-		}
 		
 		foreach (string file in Directory.GetFiles(sourcePath))
 		{
@@ -75,11 +85,14 @@ public class FileManager : MonoBehaviour
 		}
 	}
 
-	private void CheckDirectory(string directoryPath)
+	private void BuildDirectory(string directoryPath)
 	{
 		//check if directory doesn't exit
 		if(!Directory.Exists(directoryPath))
+		{
+			Debug.LogWarning("Path < " + directoryPath + " > :: Does not exsist, creating one.");
 			Directory.CreateDirectory(directoryPath);
+		}
 	}
 
 	private bool CheckFileExsist(string directoryPath)

@@ -20,14 +20,10 @@ public class SpawnArea : MonoBehaviour {
 		BoxCollider bc = GetComponent<BoxCollider>();
 		float newDelay = Random.Range(delayMin,delayMax);
 
-		Debug.Log(newDelay);
-
 		yield return new WaitForSeconds(newDelay);
 
-		Debug.Log(newDelay);
-
-		while(spawning){
-
+		while(spawning)
+		{
 			Vector3 correctPosition = transform.position-(bc.size/2)+new Vector3(0,bc.size.y/2,0);
 
 			int creating = spawnables[Random.Range(0,spawnables.Length)];

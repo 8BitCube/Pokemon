@@ -48,7 +48,6 @@ public class SoundManager : MonoBehaviour
 	{
 		if(music.IsLooped)
 		{
-			Debug.Log(music.NumSamples);
 			if(musicSource.GetComponent<AudioSource>().timeSamples >= music.NumSamples)
 			{
 				musicSource.GetComponent<AudioSource>().timeSamples = music.LoopStartSample;

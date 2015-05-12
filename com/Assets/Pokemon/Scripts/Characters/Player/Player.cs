@@ -2,6 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Author: Andrew Mills
+/// Date Modified: 5.10.2015
+/// Definition:  The player class handles player universal assets.
+/// </summary>
 public class Player : PlayerBase
 {
 	public enum PlayerMovementType { Walking, Running, Biking, Fishing, Swimming, Diving }
@@ -13,7 +18,7 @@ public class Player : PlayerBase
 	public PlayerParameters PlayerParameters { get; set; }	
 	public PlayerParameters CurrentParameters;
 
-	private void Awake()
+	public void Awake()
 	{
 		//Ignor collisions with other characters
 		Physics.IgnoreLayerCollision (this.gameObject.layer, this.gameObject.layer);
@@ -31,16 +36,17 @@ public class Player : PlayerBase
 
 	public void Load()
 	{
-		GameManager.Instance.Player.transform.position = new Vector3( DataManager.playerData.PlayerPos.x, 
-		                                  DataManager.playerData.PlayerPos.y, 
-		                                  DataManager.playerData.PlayerPos.z);
+		this.transform.position = new Vector3( 
+			DataManager.playerData.PlayerPos.x, 
+		    DataManager.playerData.PlayerPos.y, 
+		    DataManager.playerData.PlayerPos.z);
 	}
 	
 	public void Save()
 	{
-		DataManager.playerData.PlayerPos.x = GameManager.Instance.Player.transform.position.x;
-		DataManager.playerData.PlayerPos.y = GameManager.Instance.Player.transform.position.y;
-		DataManager.playerData.PlayerPos.z = GameManager.Instance.Player.transform.position.z;
+		DataManager.playerData.PlayerPos.x = this.transform.position.x;
+		DataManager.playerData.PlayerPos.y = this.transform.position.y;
+		DataManager.playerData.PlayerPos.z = this.transform.position.z;
 	}
 
 	public void Update()

@@ -4,7 +4,8 @@ using System.Collections;
 /// <summary>
 /// Author: Andrew Mills
 /// Date Modified: 5.10.2015
-/// Definition:  
+/// Definition:  In order for the Save and Load feature to work properly, please subscribe to the 
+/// 			DataEventHandler Delegate via the Awake() function, make sure to unsubscribe via the OnDestroy() function
 /// </summary>
 public class DataManager 
 {

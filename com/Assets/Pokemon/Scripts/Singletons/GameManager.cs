@@ -37,16 +37,13 @@ public class GameManager : MonoBehaviour
 		if(UseSavedInfo == false)
 			return;
 
-		DataManager.globalData = Serializer.Load<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_FILE);
+		//If you are running straight from the demo scene and 'UseSavedInfo' is true, you may experiance an error,
+		//this is due to the folder structure havn't yet to be created.  To fix this, just load the 'Menu' Scene at least once.  This insures a proper
+		//folder structure.
+		DataManager.globalData = Serializer.Load<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE);
 		DataManager.playerData = Serializer.Load<PlayerData>(DataManager.globalData.selectedSave);
 
 		DataManager.Load ();
-		
-		if(DataManager.globalData == null)
-			DataManager.globalData = new GlobalData ();
-		
-		if(DataManager.playerData == null)
-			DataManager.playerData = new PlayerData ();
 	}
 
 	/// <summary>
@@ -57,8 +54,9 @@ public class GameManager : MonoBehaviour
 		DataManager.Save();
 		SoundManager.Instance.PlaySFX(SelectSound);
 
-		Serializer.Save<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_FILE, DataManager.globalData);
+		Serializer.Save<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE, DataManager.globalData);
 		Serializer.Save<PlayerData>(DataManager.globalData.selectedSave, DataManager.playerData);
+	
 		PauseMenu.SetActive(!PauseMenu.activeSelf);
 	}
 
