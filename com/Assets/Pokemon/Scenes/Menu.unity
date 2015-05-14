@@ -886,8 +886,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 792, y: -681}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 764, y: -669}
+  m_SizeDelta: {x: -152, y: -64}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &301207256
 MonoBehaviour:
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1461433942}
+      - m_Target: {fileID: 600014661}
         m_MethodName: LoadGame
         m_Mode: 2
         m_Arguments:
@@ -1395,6 +1395,7 @@ GameObject:
   - 224: {fileID: 600014658}
   - 222: {fileID: 600014660}
   - 114: {fileID: 600014659}
+  - 114: {fileID: 600014661}
   m_Layer: 5
   m_Name: Load Level Box
   m_TagString: Untagged
@@ -1450,6 +1451,22 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 600014657}
+--- !u!114 &600014661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 600014657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aebea0617e446049ae8a40e3064d279, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LevelButtons:
+  - {fileID: 2063979775}
+  - {fileID: 1699182357}
+  - {fileID: 365992652}
+  - {fileID: 2052802172}
 --- !u!1 &626664492
 GameObject:
   m_ObjectHideFlags: 0
@@ -2252,11 +2269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 1755330414}
-  LevelButtons:
-  - {fileID: 2063979775}
-  - {fileID: 1699182357}
-  - {fileID: 365992652}
-  - {fileID: 2052802172}
 --- !u!225 &1461433943
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2456,7 +2468,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1461433942}
+      - m_Target: {fileID: 600014661}
         m_MethodName: LoadGame
         m_Mode: 2
         m_Arguments:
@@ -3292,7 +3304,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1461433942}
+      - m_Target: {fileID: 600014661}
         m_MethodName: LoadGame
         m_Mode: 2
         m_Arguments:
@@ -3447,7 +3459,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1461433942}
+      - m_Target: {fileID: 600014661}
         m_MethodName: LoadGame
         m_Mode: 2
         m_Arguments:

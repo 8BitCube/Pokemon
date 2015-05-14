@@ -22,6 +22,7 @@ public static class WorldConstants
 	public const float DEFAULT_POS_Y = 0.9f;
 	public const float DEFAULT_POS_Z = -26.74f;
 
+	public const float DEFAULT_MASTER_V = 0.5f; //TODO:: Impletement feature, no use so far.
 	public const float DEFAULT_MUSIC_V = 0.5f;
 	public const float DEFAULT_SFX_V = 0.5f;
 	#endregion

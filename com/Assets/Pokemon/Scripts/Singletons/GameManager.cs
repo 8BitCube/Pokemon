@@ -5,18 +5,19 @@ using System.IO;
 /// <summary>
 /// Author: Andrew Mills
 /// Date Modified: 5.10.2015
-/// Definition:  
+/// Definition:  The GameManager will handle initial start up, delgating the save and load functions. 
+/// 			Use "GameManager.Instance.<value>" to gain access to this class respecfully.
+/// 			NOTE:  UseSavedInfo will be removed on release, this is mearly a testing feature.
 /// </summary>
 public class GameManager : MonoBehaviour
 {
 	public static GameManager Instance = null;
 
-	public GameObject Player;
-	public GameObject PauseMenu;
-	public AudioClip SelectSound;
+	//Hold a universal reference to the players gameObjects.  
+	public GameObject player;
 
 	//Setting to true, will use the last saved file loaded.
-	public bool UseSavedInfo = false;
+	[SerializeField] private bool m_UseSavedInfo = false;
 
 	//Awake is always called before any Start functions
 	void Start()
@@ -32,11 +33,10 @@ public class GameManager : MonoBehaviour
 	//Initializes the game for each level.
 	void InitGame()
 	{
-		StartCoroutine (YieldTransition ());
-
-		if(UseSavedInfo == false)
+#if UNITY_EDITOR
+		if(m_UseSavedInfo == false)
 			return;
-
+#endif
 		//If you are running straight from the demo scene and 'UseSavedInfo' is true, you may experiance an error,
 		//this is due to the folder structure havn't yet to be created.  To fix this, just load the 'Menu' Scene at least once.  This insures a proper
 		//folder structure.
@@ -44,64 +44,5 @@ public class GameManager : MonoBehaviour
 		DataManager.playerData = Serializer.Load<PlayerData>(DataManager.globalData.selectedSave);
 
 		DataManager.Load ();
-	}
-
-	/// <summary>
-	/// Saves the game.
-	/// </summary>
-	public void SaveGame()
-	{
-		DataManager.Save();
-		SoundManager.Instance.PlaySFX(SelectSound);
-
-		Serializer.Save<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE, DataManager.globalData);
-		Serializer.Save<PlayerData>(DataManager.globalData.selectedSave, DataManager.playerData);
-	
-		PauseMenu.SetActive(!PauseMenu.activeSelf);
-	}
-
-	//LoadGame currently doesn't work
-	public void LoadGame()
-	{
-		SoundManager.Instance.PlaySFX(SelectSound);
-		PauseMenu.SetActive(!PauseMenu.activeSelf);
-	}
-
-	/// <summary>
-	/// Loads the menu.
-	/// </summary>
-	public void LoadMenu()
-	{
-		SoundManager.Instance.PlaySFX(SelectSound);
-		Application.LoadLevel ("Menu");
-		PauseMenu.SetActive(!PauseMenu.activeSelf);
-	}
-
-	//Update is called every frame.
-	void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.Escape) && UseSavedInfo)
-		{
-			SoundManager.Instance.PlaySFX(SelectSound);
-			PauseMenu.SetActive(!PauseMenu.activeSelf);
-		}
-
-		if (Input.GetKeyDown (KeyCode.P) && UseSavedInfo)
-			SaveGame ();
-	}
-
-	/// <summary>
-	/// Opens the scene with a smooth fade in transition
-	/// </summary>
-	/// <returns>The transition.</returns>
-	public IEnumerator YieldTransition()
-	{
-		IEnumerator fadeInEffect = FadeManager.Instance.FadeScreen(FadeManager.FadeType.FadeIn);
-		IEnumerator fadeInMusic = FadeManager.Instance.FadeMusic(FadeManager.FadeType.FadeIn);
-
-		while (fadeInEffect.MoveNext())
-		{ yield return null; }
-		
-		yield return null;
 	}
 }

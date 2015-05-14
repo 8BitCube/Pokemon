@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SpawnArea : MonoBehaviour {
@@ -45,7 +45,7 @@ public class SpawnArea : MonoBehaviour {
 				tries--;
 			}
 
-			if(Vector3.Distance(GameManager.Instance.Player.transform.position,correctPosition+pos)>=15)
+			if(Vector3.Distance(GameManager.Instance.player.transform.position,correctPosition+pos)>=15)
 			if(spawned<=15)
 			for(int i = 0; i < amount; i ++){
 				GameObject newPokemon = (GameObject)Instantiate(PokemonDatabase.basis,correctPosition+pos+new Vector3(Random.insideUnitCircle.x*range,0,Random.insideUnitCircle.y*range),Quaternion.identity);

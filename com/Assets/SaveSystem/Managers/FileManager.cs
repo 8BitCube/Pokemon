@@ -2,8 +2,16 @@ using UnityEngine;
 using System.Collections;
 using System.IO;
 
+/// <summary>
+/// Author: Andrew Mills
+/// Date Modified: 5.14.2015
+/// Definition:  File Manager will build the save structure in case we do not have it.  This class should only need to be built once.
+/// </summary>
 public class FileManager 
 {
+	/// <summary>
+	/// Builds the save structure.
+	/// </summary>
 	public void BuildSaveStructure()
 	{		
 		BuildDirectory (Application.dataPath + WorldConstants.WORLD_SAVE_DIR);
@@ -24,6 +32,9 @@ public class FileManager
 		DataManager.globalData.selectedSave = DataManager.globalData.SavePaths [0];
 	}
 
+	/// <summary>
+	/// Loads the GlobalData or creates a new one.
+	/// </summary>
 	public void BuildGlobalData()
 	{
 		string _path = Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE;
@@ -42,6 +53,10 @@ public class FileManager
 		}
 	}
 
+	/// <summary>
+	/// Loads player data based on the saveValue passed in, 
+	/// </summary>
+	/// <param name="aSaveValue">A save value.</param>
 	public void BuildPlayerData(int aSaveValue)
 	{
 		string _path = Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "/Save " + aSaveValue;
@@ -50,7 +65,6 @@ public class FileManager
 			DataManager.playerData = Serializer.Load<PlayerData>(_path + WorldConstants.PLAYER_INFO_FILE);
 		else
 		{
-			Debug.Log("Built a new Player Data file");
 			DataManager.playerData = new PlayerData ();
 			DataManager.playerData.PlayerPos.x = WorldConstants.DEFAULT_POS_X;
 			DataManager.playerData.PlayerPos.y = WorldConstants.DEFAULT_POS_Y;
@@ -62,11 +76,20 @@ public class FileManager
 		DataManager.globalData.SavePaths[aSaveValue] = _path + WorldConstants.PLAYER_INFO_FILE;
 	}
 
+	/// <summary>
+	/// Deletes the directory passed in.
+	/// </summary>
+	/// <param name="sourcePath">Source path.</param>
 	private void DeleteDirectory(string sourcePath)
 	{
 
 	}
 
+	/// <summary>
+	/// Copies the directory.
+	/// </summary>
+	/// <param name="sourcePath">Source path.</param>
+	/// <param name="destPath">Destination path.</param>
 	private static void CopyDirectory(string sourcePath, string destPath)
 	{
 		if (!Directory.Exists(destPath))
@@ -85,6 +108,10 @@ public class FileManager
 		}
 	}
 
+	/// <summary>
+	/// Builds the directory. But it makes a check first
+	/// </summary>
+	/// <param name="directoryPath">Directory path.</param>
 	private void BuildDirectory(string directoryPath)
 	{
 		//check if directory doesn't exit
