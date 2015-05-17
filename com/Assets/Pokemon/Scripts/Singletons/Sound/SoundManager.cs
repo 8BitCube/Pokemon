@@ -51,29 +51,33 @@ public class SoundManager : MonoBehaviour
 	/// </summary>
 	public void Load()
 	{
-		musicSource.volume = DataManager.globalData.MusicVolume;
-		sfxSource.volume = DataManager.globalData.SFXVolume;
+		musicSource.volume  = DataManager.globalData.MusicVolume;
+		sfxSource.volume 	= DataManager.globalData.SFXVolume;
 
-		musicSource.GetComponent<AudioSource>().clip = music.clip;
-		musicSource.GetComponent<AudioSource>().Play();
+		musicSource.clip = music.clip;
+		musicSource.Play();
 	}
 
-	void FixedUpdate()
+	void Update()
 	{
 		if(music.IsLooped)
 		{
-			if(musicSource.GetComponent<AudioSource>().timeSamples >= music.NumSamples)
+			if( (!musicSource.isPlaying) || (musicSource.timeSamples >= music.NumSamples))
 			{
-				musicSource.GetComponent<AudioSource>().timeSamples = music.LoopStartSample;
-				musicSource.GetComponent<AudioSource>().Play();
+				musicSource.timeSamples = music.LoopStartSample;
+				musicSource.Play();
 			}
 		}
 	}
 
+	/// <summary>
+	/// Plays the audio clip passed in
+	/// </summary>
+	/// <param name="aSFX">A SF.</param>
 	public void PlaySFX(AudioClip aSFX)
 	{
-		sfxSource.GetComponent<AudioSource>().Stop();
-		sfxSource.GetComponent<AudioSource>().clip = aSFX;
-		sfxSource.GetComponent<AudioSource>().Play ();
+		sfxSource.Stop();
+		sfxSource.clip = aSFX;
+		sfxSource.Play ();
 	}
 }

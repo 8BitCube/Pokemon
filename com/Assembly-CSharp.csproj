@@ -54,7 +54,6 @@
      <Compile Include="Assets\LitJson\JsonWriter.cs" />
      <Compile Include="Assets\LitJson\Lexer.cs" />
      <Compile Include="Assets\LitJson\ParserToken.cs" />
-     <Compile Include="Assets\OptionsManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Camera\Player Camera\CameraController.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Camera\Player Camera\Helper.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Characters\Controllers\BaseController.cs" />
@@ -81,6 +80,7 @@
      <Compile Include="Assets\Pokemon\Scripts\Map\Transporter.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\GameManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\LogoManager.cs" />
+     <Compile Include="Assets\Pokemon\Scripts\Singletons\OptionsManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\PauseManager.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\Sound\AudioInformation.cs" />
      <Compile Include="Assets\Pokemon\Scripts\Singletons\Sound\SoundManager.cs" />
