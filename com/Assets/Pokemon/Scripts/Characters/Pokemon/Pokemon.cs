@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class Pokemon : PlayerBase
+public class Pokemon : CharacterBase
 {
 	public CharacterController CharacterController;
 	

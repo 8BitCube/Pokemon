@@ -4,6 +4,7 @@ using System.Collections;
 public class AudioInformation : ScriptableObject
 {
 	public string Name;
+	public int ID;
 	public AudioClip clip;
 	
 	public int Channels;

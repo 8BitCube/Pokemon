@@ -7,7 +7,7 @@ using System.IO;
 /// Date Modified: 5.14.2015
 /// Definition:  File Manager will build the save structure in case we do not have it.  This class should only need to be built once.
 /// </summary>
-public class FileManager 
+public class FileManager
 {
 	/// <summary>
 	/// Builds the save structure.
@@ -23,13 +23,10 @@ public class FileManager
 		{
 			string _path = Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "/Save " + x;
 			BuildDirectory (_path);
-
-			DataManager.globalData.SavePaths[x] = _path + WorldConstants.PLAYER_INFO_FILE;
-			DataManager.globalData.SaveNames[x] = x.ToString();
 		}
 
 		//For Testing builds.  Save one will always be the default build.
-		DataManager.globalData.selectedSave = DataManager.globalData.SavePaths [0];
+		DataManager.globalData.SavePathToLoad = DataManager.globalData.SavePaths [0];
 	}
 
 	/// <summary>
@@ -53,27 +50,36 @@ public class FileManager
 		}
 	}
 
+	public void BuildLevelData(string aPath, int aSaveValue)
+	{
+		if (File.Exists (aPath + WorldConstants.LEVEL_INFO_FILE))
+			DataManager.characterData = Serializer.Load<CharacterData>(aPath + WorldConstants.LEVEL_INFO_FILE);
+		else
+		{
+			DataManager.levelData = new LevelData ();
+			DataManager.levelData.MusicID = WorldConstants.DEFAULT_MUSICID;
+			
+			Serializer.Save<LevelData>(aPath + WorldConstants.LEVEL_INFO_FILE, DataManager.levelData);
+		}
+	}
+
 	/// <summary>
 	/// Loads player data based on the saveValue passed in, 
 	/// </summary>
 	/// <param name="aSaveValue">A save value.</param>
-	public void BuildPlayerData(int aSaveValue)
+	public void BuildPlayerData(string aPath, int aSaveValue)
 	{
-		string _path = Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "/Save " + aSaveValue;
-
-		if (File.Exists (_path + WorldConstants.PLAYER_INFO_FILE))
-			DataManager.playerData = Serializer.Load<PlayerData>(_path + WorldConstants.PLAYER_INFO_FILE);
+		if (File.Exists (aPath + WorldConstants.PLAYER_INFO_FILE))
+			DataManager.characterData = Serializer.Load<CharacterData>(aPath + WorldConstants.PLAYER_INFO_FILE);
 		else
 		{
-			DataManager.playerData = new PlayerData ();
-			DataManager.playerData.PlayerPos.x = WorldConstants.DEFAULT_POS_X;
-			DataManager.playerData.PlayerPos.y = WorldConstants.DEFAULT_POS_Y;
-			DataManager.playerData.PlayerPos.z = WorldConstants.DEFAULT_POS_Z;
+			DataManager.characterData = new CharacterData ();
+			DataManager.characterData.CharacterPosition.x = WorldConstants.DEFAULT_POS_X;
+			DataManager.characterData.CharacterPosition.y = WorldConstants.DEFAULT_POS_Y;
+			DataManager.characterData.CharacterPosition.z = WorldConstants.DEFAULT_POS_Z;
 			
-			Serializer.Save<PlayerData>(_path + WorldConstants.PLAYER_INFO_FILE, DataManager.playerData);
+			Serializer.Save<CharacterData>(aPath + WorldConstants.PLAYER_INFO_FILE, DataManager.characterData);
 		}
-
-		DataManager.globalData.SavePaths[aSaveValue] = _path + WorldConstants.PLAYER_INFO_FILE;
 	}
 
 	/// <summary>

@@ -14,9 +14,9 @@ public class FadeManager : MonoBehaviour
 	public static FadeManager Instance = null;
 	public enum FadeType { FadeIn, FadeOut }
 
-	// Preferably a range from 0-100, this will adjust how fast we transition or fading.
-	// NOTE::  100 does not mean instant transition
-	[Range (0,100)] public int fadeTransitionSpeed = 25;
+	// Preferably a range from 0-200, this will adjust how fast we transition or fading.
+	// NOTE::  200 does not mean instant transition
+	[Range (0,200)] public int fadeTransitionSpeed = 25;
 
 	//TODO::  Have a Save and Load feature for player to adjust the fadeTranitionSpeed.
 	void Awake()
@@ -70,13 +70,14 @@ public class FadeManager : MonoBehaviour
 									: SoundManager.Instance.musicSource.volume;
 
 		float _soundValue = (aFadeType == FadeType.FadeIn ) ? 0.0f : 1.0f;
-		while((aFadeType == FadeType.FadeIn ) ? (_soundValue < 1.0f) : ( _soundValue > 0.0f))
+
+		while(((aFadeType == FadeType.FadeIn ) ? (_soundValue < 1.0f) : ( _soundValue > 0.0f)))
 		{
 			_soundValue += ((aFadeType == FadeType.FadeIn) ? 1 : -1 ) * (1 * (float)fadeTransitionSpeed / 100.0f) * Time.deltaTime;
 			SoundManager.Instance.musicSource.volume = currentSoundLevel * _soundValue;
 			yield return null;
 		}
-		
+
 		//Once completed exit coroutine
 		yield return null;
 	}

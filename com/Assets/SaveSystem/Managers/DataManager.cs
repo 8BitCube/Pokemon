@@ -15,7 +15,8 @@ public class DataManager
 	public static event DataEventHandler onSave;
 
 	public static GlobalData globalData;
-	public static PlayerData playerData;
+	public static LevelData levelData;
+	public static CharacterData characterData;
 
 	/// <summary>
 	/// Holds a static load feature that will load all subscribed instances

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -15,6 +15,12 @@ public class PauseManager : MonoBehaviour
 	
 	void Update ()
 	{
+		#if UNITY_EDITOR
+		//Disable the function to press esc if we dont use the save feature.
+		if(GameManager.Instance.useSavedInfo == false)
+			return;
+
+		#endif
 		//Temporary, TODO:: Add to the PlayerInput.cs HandleActionInput() function.
 		if(Input.GetKeyDown(KeyCode.Escape))
 		{
@@ -24,17 +30,14 @@ public class PauseManager : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Saves the game.
+	/// Activates a sound and calls the save game method in GameManager.
 	/// </summary>
 	public void SaveViaButton()
 	{
-		DataManager.Save();
 		SoundManager.Instance.PlaySFX(selectSound);
-		
-		Serializer.Save<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE, DataManager.globalData);
-		Serializer.Save<PlayerData>(DataManager.globalData.selectedSave, DataManager.playerData);
+		MenuManager.Instance.CurrentMenu = noMenu;
 
-		MenuManager.Instance.CurrentMenu = null;
+		GameManager.Instance.SaveData ();
 	}
 
 	//LoadGame currently does nothing fun

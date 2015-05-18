@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
 	//Hold a universal reference to the players gameObjects.  
 	public GameObject player;
 
+	public bool IsFading = false;
+	public bool IsSoundFading = false;
+
 	//Setting to true, will use the last saved file loaded.
-	[SerializeField] private bool m_UseSavedInfo = false;
+	public bool useSavedInfo = false;
 
 	//Awake is always called before any Start functions
 	void Start()
@@ -34,15 +37,61 @@ public class GameManager : MonoBehaviour
 	void InitGame()
 	{
 #if UNITY_EDITOR
-		if(m_UseSavedInfo == false)
+		if(useSavedInfo == false)
 			return;
 #endif
+
+		LoadData ();
+	}
+
+	public void SaveData() 
+	{
+		DataManager.Save();
+
+		Serializer.Save<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE, DataManager.globalData);
+		Serializer.Save<LevelData>(DataManager.globalData.SavePathToLoad + WorldConstants.LEVEL_INFO_FILE, DataManager.levelData);
+		Serializer.Save<CharacterData>(DataManager.globalData.SavePathToLoad + WorldConstants.PLAYER_INFO_FILE, DataManager.characterData);
+	}
+
+	public void LoadData()
+	{
 		//If you are running straight from the demo scene and 'UseSavedInfo' is true, you may experiance an error,
 		//this is due to the folder structure havn't yet to be created.  To fix this, just load the 'Menu' Scene at least once.  This insures a proper
 		//folder structure.
 		DataManager.globalData = Serializer.Load<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE);
-		DataManager.playerData = Serializer.Load<PlayerData>(DataManager.globalData.selectedSave);
-
+		DataManager.levelData = Serializer.Load<LevelData>(DataManager.globalData.SavePathToLoad + WorldConstants.LEVEL_INFO_FILE);
+		DataManager.characterData = Serializer.Load<CharacterData>(DataManager.globalData.SavePathToLoad + WorldConstants.PLAYER_INFO_FILE);
+		
 		DataManager.Load ();
+	}
+
+	/// <summary>
+	/// Allows the player movement input.
+	/// This class will check other statments in the game.  
+	/// There can be multiple reasons why the player isn't allowed 
+	/// to have movement input;  animations, dialog, fading etc.
+	/// </summary>
+	/// <returns><c>true</c>, if player movement input was allowed, <c>false</c> otherwise.</returns>
+	public bool AllowPlayerMovementInput()
+	{
+		if((GameManager.Instance.IsFading == false) && true && true && true)
+			return true;
+
+		return false;
+	}
+
+	/// <summary>
+	/// Allows the player action input.
+	/// This class will check other statments in the game.  
+	/// There can be multiple reasons why the player isn't allowed 
+	/// to press the 'Action' Input; fading, well fading is the only one I can think of at this moment.
+	/// </summary>
+	/// <returns><c>true</c>, if player movement input was allowed, <c>false</c> otherwise.</returns>
+	public bool AllowPlayerActionInput()
+	{
+		if((GameManager.Instance.IsFading == false) && true && true && true)
+			return true;
+		
+		return false;
 	}
 }

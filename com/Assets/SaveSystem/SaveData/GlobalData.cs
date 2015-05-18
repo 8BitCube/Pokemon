@@ -7,7 +7,7 @@ public class GlobalData
 	public string[] SavePaths;
 	public string[] SaveNames;
 
-	public string selectedSave;
+	public string SavePathToLoad;
 
 	public float MusicVolume;
 	public float SFXVolume;

@@ -54,8 +54,7 @@ public static class Helper
 		_clipPlanePoint.UpperLeft = pos - transform.right * width;
 		_clipPlanePoint.UpperLeft += transform.up * height;
 		_clipPlanePoint.UpperLeft += transform.forward;
-		
-		
+				
 		return _clipPlanePoint;
 	}
 }

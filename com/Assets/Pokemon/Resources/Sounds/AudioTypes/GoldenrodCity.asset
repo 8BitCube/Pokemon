@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c68b5bc43e848448918b816aa0a86e, type: 3}
+  m_Name: GoldenrodCity
+  m_EditorClassIdentifier: 
+  Name: GoldenrodCity
+  ID: 4
+  clip: {fileID: 8300000, guid: c8b9d9a7cb4f87945b845439ff418603, type: 3}
+  Channels: 0
+  IsLooped: 1
+  SampleRate: 44100
+  LoopStartSample: 401408
+  NumSamples: 1953728
+  DataOffset: 1472
+  NumBlocks: 137
+  BlockSize: 8192
+  BitPerSample: 4

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Author: Andrew Mills
@@ -10,20 +11,27 @@ using System.Collections;
 public class SoundManager : MonoBehaviour 
 {
 	public static SoundManager Instance = null; 
+	
+	public int musicID;
+	public AudioClip soundToBe;
 
-	//Hold reference to our Audio information.
-	//NOTE:  A SFX AudioInfo variable is not needed as it does not require any information other than the accual clip.
-	public AudioInformation music;
+	public Object[] MusicArray;
 
 	//Hold reference to our Audio Source Components.
 	public AudioSource musicSource;
 	public AudioSource sfxSource;
 
-	void Awake ()
+	//Hold reference to our music information.
+	private AudioInformation music;
+
+	public void Awake ()
 	{
 		//Check if there is already an instance of SoundManager
 		if (Instance == null)
 			Instance = this;
+
+		MusicArray = Resources.LoadAll(WorldConstants.SOUND_AUDIO_DIR) as Object[]; 
+		music = MusicArray [0] as AudioInformation;
 
 		//Subscribe our save and load functions.
 		DataManager.onSave += this.Save;
@@ -44,6 +52,8 @@ public class SoundManager : MonoBehaviour
 	{
 		DataManager.globalData.MusicVolume = musicSource.volume;
 		DataManager.globalData.SFXVolume = sfxSource.volume;
+
+		DataManager.levelData.MusicID = musicID;
 	}
 
 	/// <summary>
@@ -53,6 +63,9 @@ public class SoundManager : MonoBehaviour
 	{
 		musicSource.volume  = DataManager.globalData.MusicVolume;
 		sfxSource.volume 	= DataManager.globalData.SFXVolume;
+		musicID = DataManager.levelData.MusicID;
+
+		music = MusicArray [musicID] as AudioInformation;
 
 		musicSource.clip = music.clip;
 		musicSource.Play();
@@ -62,7 +75,7 @@ public class SoundManager : MonoBehaviour
 	{
 		if(music.IsLooped)
 		{
-			if( (!musicSource.isPlaying) || (musicSource.timeSamples >= music.NumSamples))
+			if((musicSource.isPlaying == false) || (musicSource.timeSamples >= music.NumSamples))
 			{
 				musicSource.timeSamples = music.LoopStartSample;
 				musicSource.Play();

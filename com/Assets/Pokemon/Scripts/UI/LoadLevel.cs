@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using System.Collections;
@@ -12,8 +12,7 @@ public class LoadLevel : MonoBehaviour
 	void Start ()
 	{
 		fManager = new FileManager ();
-		fManager.BuildSaveStructure ();
-		
+		fManager.BuildSaveStructure ();		
 		
 		for(int x = 0; x < LevelButtons.Length; x++)
 		{			
@@ -23,9 +22,14 @@ public class LoadLevel : MonoBehaviour
 		
 		for(int x = 0; x < DataManager.globalData.SavePaths.Length; x++)
 		{
+			string _path = Application.dataPath + WorldConstants.WORLD_SAVE_DIR + "/Save " + x;
+
 			LevelButtons[x].interactable = true;
-			
-			fManager.BuildPlayerData(x);
+
+			fManager.BuildLevelData(_path, x);
+			fManager.BuildPlayerData(_path, x);
+						
+			DataManager.globalData.SavePaths[x] = _path;
 			
 			LevelButtons[x].GetComponentInChildren<Text>().text = DataManager.globalData.SaveNames[x];
 			LevelButtons[x].GetComponent<LevelButton>().saveDest = DataManager.globalData.SavePaths[x];
@@ -35,7 +39,7 @@ public class LoadLevel : MonoBehaviour
 	
 	public void LoadGame(LevelButton aLevelButton)
 	{
-		DataManager.globalData.selectedSave = aLevelButton.saveDest;
+		DataManager.globalData.SavePathToLoad = aLevelButton.saveDest;
 		Serializer.Save<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE, DataManager.globalData);
 		Application.LoadLevel (3);
 	}

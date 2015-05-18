@@ -16,7 +16,7 @@ public class SpriteMesh
 
 	Mesh tmp = new Mesh();
 
-	public int downScale=1;
+	public int downScale=2;
 	public float depth=0.07f;
 
 	public Mesh depthMesh(Vector2 pos, Vector2 size)

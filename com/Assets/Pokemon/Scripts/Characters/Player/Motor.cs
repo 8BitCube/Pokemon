@@ -23,7 +23,7 @@ public class Motor : BaseController
 		Controller = GetComponent<CharacterController> ();
 	}
 
-	void LateUpdate()
+	void Update()
 	{
 		UpdatePosition();
 		UpdateRotation();

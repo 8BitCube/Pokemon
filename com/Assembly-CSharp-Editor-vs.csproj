@@ -48,6 +48,8 @@
   <ItemGroup>
      <Compile Include="Assets\Pokemon\Editor\AudioAsset.cs" />
      <Compile Include="Assets\Pokemon\Editor\AudioEditor.cs" />
+     <Compile Include="Assets\Pokemon\Editor\CharacterParameterAsset.cs" />
+     <Compile Include="Assets\Pokemon\Editor\CharacterParameterEditor.cs" />
      <Compile Include="Assets\Pokemon\Editor\ImageEffects\AntialiasingEditor.cs" />
      <Compile Include="Assets\Pokemon\Editor\ImageEffects\BloomAndFlaresEditor.cs" />
      <Compile Include="Assets\Pokemon\Editor\ImageEffects\BloomEditor.cs" />
@@ -141,6 +143,9 @@
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset2.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
+ <Reference Include="Assembly-UnityScript">
+ <HintPath>C:/Users/Mills/Documents/GitHub/Pokemon/com/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

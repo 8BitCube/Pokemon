@@ -1,13 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerInput : PlayerBase
+public class PlayerInput : CharacterBase
 {
 	public LayerMask mouseClickMask;
 
 	private bool m_NumLockToggle = false;
 	private bool m_RunToggle = false;
-	private bool m_BikeRideToggle = false;
 
 	/// <summary>
 	/// Update this instance.
@@ -15,10 +14,15 @@ public class PlayerInput : PlayerBase
 	void Update()
 	{
 		//Reset values so we can handle input properly.  
-		PlayerMovement.VerticalVelocity = PlayerMovement.MoveVector.y;
-		PlayerMovement.MoveVector = Vector3.zero;
+		Movement.VerticalVelocity = Movement.MoveVector.y;
+		Movement.MoveVector = Vector3.zero;
+		Movement.RotationDirection = 0;
 
-		GetLocomotionInput();
+		m_RunToggle = false;
+
+		if(GameManager.Instance.AllowPlayerMovementInput())
+			GetLocomotionInput();
+
 		HandleActionInput();
 	}
 
@@ -27,45 +31,32 @@ public class PlayerInput : PlayerBase
 	/// </summary>
 	private void GetLocomotionInput()
 	{
-		// Toggle the Biking
-		if(Player.CharacterController.isGrounded && Input.GetKeyDown(KeyCode.Backspace))
-			m_BikeRideToggle = !m_BikeRideToggle;
-		
-		// Toggle running Shift = true
-		if(Input.GetKeyDown(KeyCode.LeftShift))
-			m_RunToggle = true;
-		if(Input.GetKeyUp(KeyCode.LeftShift))
-			m_RunToggle = false;
-
-		if(Player.PlayerParameters.CanRun)
+		if(Character.CurrentParameters.CanRun)
 		{
+			// Toggle running Shift = true
+			if(Input.GetKey(KeyCode.LeftShift) && Movement.Controller.isGrounded)
+				m_RunToggle = true;
+
 			if(m_RunToggle == true)
-				Player.UpdateToNewParameters(Player.PlayerMovementType.Running);
-		}
-
-		if(Player.PlayerParameters.CanBike)
-		{
-			if(m_BikeRideToggle == true)
-				Player.UpdateToNewParameters(Player.PlayerMovementType.Biking);
+			{
+				Character.CurrentParameters = Character.RunParameter;
+				Character.UpdateParameter();
+			}
 			else
 			{
-				if(m_RunToggle == false)
-					Player.UpdateToNewParameters(Player.PlayerMovementType.Walking);
-				else
-					Player.UpdateToNewParameters(Player.PlayerMovementType.Running);
+				Character.CurrentParameters = Character.WalkParameter;
+				Character.UpdateParameter();
 			}
 		}
 
-		//If we are not running or biking then walk
-		if(m_RunToggle == false && m_BikeRideToggle == false)
-			Player.UpdateToNewParameters(Player.PlayerMovementType.Walking);
+
 
 		// Toggable Numlock
 		if(Input.GetKeyDown(KeyCode.Numlock))
 			m_NumLockToggle = !m_NumLockToggle;
 		
 		if(m_NumLockToggle == true)
-			PlayerMovement.MoveVector += Vector3.forward;
+			Movement.MoveVector += Vector3.forward;
 
 		// If both left and right buttons are clicked, then move forward
 		if(Input.GetMouseButton(0) && Input.GetMouseButton(1))
@@ -73,47 +64,55 @@ public class PlayerInput : PlayerBase
 			if(m_NumLockToggle == true)
 				m_NumLockToggle = !m_NumLockToggle;
 			
-			PlayerMovement.MoveVector += Vector3.forward;
+			Movement.MoveVector += Vector3.forward;
 		}
 		
 		if(Input.GetMouseButton(1))
-			PlayerMovement.SnapAllignCharacterWithCamera();
-
-
-		if(Player.PlayerParameters.CanJump && Input.GetKey(KeyBindings.Jump))
-			PlayerMovement.Jump();
+			Movement.SnapAllignCharacterWithCamera();
 
 		if(Input.GetKey(KeyBindings.Forward) || Input.GetKey(KeyCode.UpArrow))
 		{
 			if(m_NumLockToggle == true)
 				m_NumLockToggle = !m_NumLockToggle;
-			PlayerMovement.MoveVector += Vector3.forward;
+			Movement.MoveVector += Vector3.forward;
 		}
 
-		if(Input.GetKey(KeyBindings.Backward) || Input.GetKey(KeyCode.DownArrow))
+		//If out state allows us to Jump, proceed
+		if(Character.CurrentParameters.CanJump )
 		{
-			if(m_NumLockToggle == true)
-				m_NumLockToggle = !m_NumLockToggle;
-			PlayerMovement.MoveVector += -Vector3.forward;
+			if(Input.GetKey(KeyBindings.Jump))
+				Movement.Jump();
+		}
+
+		//If our state allows reverse movement, proceed
+		if(Character.CurrentParameters.CanReverse)
+		{
+			if(Input.GetKey(KeyBindings.Backward) || Input.GetKey(KeyCode.DownArrow))
+			{
+				if(m_NumLockToggle == true)
+					m_NumLockToggle = !m_NumLockToggle;
+				Movement.MoveVector += -Vector3.forward;
+			}
 		}
 
 		// Allow Strafing only when we walk
-		if(Player.curPlayerMovementType == Player.PlayerMovementType.Walking)
+		if(Character.CurrentParameters.CanStraf)
 		{
 			if(Input.GetKey(KeyBindings.StrafLeft))
-				PlayerMovement.MoveVector += Vector3.left;
+				Movement.MoveVector += Vector3.left;
 
 			if(Input.GetKey(KeyBindings.StrafRight))
-				PlayerMovement.MoveVector += Vector3.right;
+				Movement.MoveVector += Vector3.right;
 		}
 
-		if(Input.GetKey(KeyBindings.Left) || Input.GetKey(KeyCode.LeftArrow))
-			PlayerMovement.RotationDirection = -1;
-		else if(Input.GetKey(KeyBindings.Right) || Input.GetKey(KeyCode.RightArrow))
-			PlayerMovement.RotationDirection = 1;
-		else
-			PlayerMovement.RotationDirection = 0;
-
+		// Allow Strafing only when we walk
+		if(Character.CurrentParameters.CanRotate)
+		{
+			if(Input.GetKey(KeyBindings.Left) || Input.GetKey(KeyCode.LeftArrow))
+				Movement.RotationDirection = -1;
+			else if(Input.GetKey(KeyBindings.Right) || Input.GetKey(KeyCode.RightArrow))
+				Movement.RotationDirection = 1;
+		}
 	}
 
 	/// <summary>

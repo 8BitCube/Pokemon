@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BaseController : MonoBehaviour 
 {
-	Player m_Player;
-	public Player Player
+	Character m_Player;
+	public Character Player
 	{
 		get
 		{
 			if(m_Player == null)
-				m_Player = GetComponent<Player>();
+				m_Player = GetComponent<Character>();
 			
 			return m_Player;
 		}
@@ -39,13 +39,13 @@ public class BaseController : MonoBehaviour
 		}
 	}
 	
-	PlayerVisuals m_PlayerVisuals;
-	public PlayerVisuals PlayerVisuals
+	CharacterVisuals m_PlayerVisuals;
+	public CharacterVisuals PlayerVisuals
 	{
 		get
 		{
 			if(m_PlayerVisuals == null)
-				m_PlayerVisuals = GetComponent<PlayerVisuals>();
+				m_PlayerVisuals = GetComponent<CharacterVisuals>();
 			
 			return m_PlayerVisuals;
 		}

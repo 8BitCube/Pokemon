@@ -9,12 +9,14 @@ public static class WorldConstants
 
 	#region Directories
 	public const string WORLD_SAVE_DIR = "/WorldSaves";
+	public const string SOUND_AUDIO_DIR = "Sounds/AudioTypes/";
 	public const string GLOBAL_INFO_DIR = "/WorldSaves/GlobalData";
 	#endregion
 
 	#region Files
 	public const string GLOBAL_INFO_FILE = "/GlobalData.dat";
 	public const string PLAYER_INFO_FILE = "/Player.dat";
+	public const string LEVEL_INFO_FILE = "/Level.dat";
 	#endregion
 
 	#region New Game Values
@@ -25,5 +27,7 @@ public static class WorldConstants
 	public const float DEFAULT_MASTER_V = 0.5f; //TODO:: Impletement feature, no use so far.
 	public const float DEFAULT_MUSIC_V = 0.5f;
 	public const float DEFAULT_SFX_V = 0.5f;
+
+	public const int   DEFAULT_MUSICID = 0;
 	#endregion
 }
