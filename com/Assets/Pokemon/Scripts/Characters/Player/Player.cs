@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// Date Modified: 5.10.2015
 /// Definition:  The player class handles player universal assets.
 /// </summary>
-public class Character : CharacterBase
+public class Player : CharacterBase
 {
 	public CharacterParameters CurrentParameters { get; set; }
 		
@@ -49,14 +49,18 @@ public class Character : CharacterBase
 	public void Update()
 	{
 		if (Movement.MoveVector.x != 0 || Movement.MoveVector.z != 0) 
-			PlayerVisuals.IsAnimating = true;
+			CharacterVisuals.IsAnimating = true;
 		else
-			PlayerVisuals.IsAnimating = false;
+			if(CharacterVisuals.IsAnimating != false)
+			{
+				CharacterVisuals.IsAnimating = false;
+				CharacterVisuals.UpdateIdolImage();
+			}
 	}
 
 	public void UpdateParameter()
 	{
-		PlayerVisuals.defaultTexture = CurrentParameters.SpriteSheet;
+		CharacterVisuals.defaultTexture = CurrentParameters.SpriteSheet;
 		Movement.speed = CurrentParameters.Speed;
 	}
 }

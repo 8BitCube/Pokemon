@@ -4,13 +4,17 @@ using System.Collections;
 public static class WorldConstants 
 {
 	public const string PLAYER_TAG = "Player";
-	public const string COMPANY_NAME = "8 Bit Cube";
+	public const string POKEMON_TAG = "Pokemon";
+	public const string NPC_TAG = "NPC";
+	
 	public const string GAME_NAME = "Pokemon";
+	public const string COMPANY_NAME = "8 Bit Cube";
 
 	#region Directories
 	public const string WORLD_SAVE_DIR = "/WorldSaves";
 	public const string SOUND_AUDIO_DIR = "Sounds/AudioTypes/";
 	public const string GLOBAL_INFO_DIR = "/WorldSaves/GlobalData";
+	public const string POKEMON_SPRITE_DIR = "Images/SpriteSheets/Pokemon/";
 	#endregion
 
 	#region Files

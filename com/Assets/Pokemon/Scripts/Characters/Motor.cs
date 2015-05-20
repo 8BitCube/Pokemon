@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Motor : BaseController 
+public class Motor : CharacterBase 
 {
 	public CharacterController Controller;
 	public AudioClip jumpSound;
@@ -61,7 +61,7 @@ public class Motor : BaseController
 	private void UpdateRotation()
 	{
 		eulerAngleV3.x = transform.eulerAngles.x;
-		eulerAngleV3.y = transform.eulerAngles.y + (PlayerMovement.rotationSpeed * PlayerMovement.RotationDirection) * m_RotationSpeed * Time.deltaTime;
+		eulerAngleV3.y = transform.eulerAngles.y + (Movement.rotationSpeed * Movement.RotationDirection) * m_RotationSpeed * Time.deltaTime;
 		eulerAngleV3.z = transform.eulerAngles.z;
 
 		transform.eulerAngles = eulerAngleV3;	

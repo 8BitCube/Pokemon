@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerInput : CharacterBase
 {
+	public Player player;
 	public LayerMask mouseClickMask;
 
 	private bool m_NumLockToggle = false;
@@ -31,7 +32,7 @@ public class PlayerInput : CharacterBase
 	/// </summary>
 	private void GetLocomotionInput()
 	{
-		if(Character.CurrentParameters.CanRun)
+		if(player.CurrentParameters.CanRun)
 		{
 			// Toggle running Shift = true
 			if(Input.GetKey(KeyCode.LeftShift) && Movement.Controller.isGrounded)
@@ -39,13 +40,13 @@ public class PlayerInput : CharacterBase
 
 			if(m_RunToggle == true)
 			{
-				Character.CurrentParameters = Character.RunParameter;
-				Character.UpdateParameter();
+				player.CurrentParameters = player.RunParameter;
+				player.UpdateParameter();
 			}
 			else
 			{
-				Character.CurrentParameters = Character.WalkParameter;
-				Character.UpdateParameter();
+				player.CurrentParameters = player.WalkParameter;
+				player.UpdateParameter();
 			}
 		}
 
@@ -78,14 +79,14 @@ public class PlayerInput : CharacterBase
 		}
 
 		//If out state allows us to Jump, proceed
-		if(Character.CurrentParameters.CanJump )
+		if(player.CurrentParameters.CanJump )
 		{
 			if(Input.GetKey(KeyBindings.Jump))
 				Movement.Jump();
 		}
 
 		//If our state allows reverse movement, proceed
-		if(Character.CurrentParameters.CanReverse)
+		if(player.CurrentParameters.CanReverse)
 		{
 			if(Input.GetKey(KeyBindings.Backward) || Input.GetKey(KeyCode.DownArrow))
 			{
@@ -96,7 +97,7 @@ public class PlayerInput : CharacterBase
 		}
 
 		// Allow Strafing only when we walk
-		if(Character.CurrentParameters.CanStraf)
+		if(player.CurrentParameters.CanStraf)
 		{
 			if(Input.GetKey(KeyBindings.StrafLeft))
 				Movement.MoveVector += Vector3.left;
@@ -106,7 +107,7 @@ public class PlayerInput : CharacterBase
 		}
 
 		// Allow Strafing only when we walk
-		if(Character.CurrentParameters.CanRotate)
+		if(player.CurrentParameters.CanRotate)
 		{
 			if(Input.GetKey(KeyBindings.Left) || Input.GetKey(KeyCode.LeftArrow))
 				Movement.RotationDirection = -1;

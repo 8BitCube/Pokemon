@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11454666}
   - 114: {fileID: 11454668}
   - 114: {fileID: 11454670}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.5219994, y: .554999948, z: -26.7399998}
+  m_LocalPosition: {x: 16.5219994, y: .604999959, z: -26.7399998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -129,23 +129,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9aebe65086e7bd49a19bae0b33582f6, type: 3}
+  m_Script: {fileID: 11500000, guid: be043a2a4c0d72b49beb098bb12034c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curPlayerMovementType: 0
-  CharacterController: {fileID: 14300000}
-  SpriteRenderer: {fileID: 2300000}
-  CurrentParameters:
-    Speed: 3
-    SpriteSheet: {fileID: 0}
-    SpriteSize: {x: 1, y: 1, z: 1}
-    CanMove: 0
-    CanJump: 0
-    CanRun: 0
-    CanBike: 0
-    CanFish: 0
-    CanFly: 0
-    CanDive: 0
+  WalkParameter: {fileID: 11400000, guid: e4d74b89fe3539944a226c3fbb2bfd2b, type: 2}
+  RunParameter: {fileID: 11400000, guid: 553ee0ee35edc5f41a36a7998e654783, type: 2}
 --- !u!114 &11454666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,7 +148,7 @@ MonoBehaviour:
   Controller: {fileID: 14300000}
   jumpSound: {fileID: 8300000, guid: f2ad8f41d48c02e4ead5531dde4abd29, type: 3}
   speed: 3
-  gravity: 21
+  gravity: 24
   jumpSpeed: 6
   terminalVelocity: 20
   rotationSpeed: 5
@@ -175,9 +163,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a1e2c762a79994b8c09229c98d3cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 11454664}
   mouseClickMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
 --- !u!114 &11454670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,10 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0959a7e2133c4840bcba2bc67719a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurSpriteState: 0
-  defaultTexture: {fileID: 2800000, guid: 276f3e034a102594e8e9b1d742c10f3b, type: 3}
+  defaultTexture: {fileID: 2800000, guid: 1bdac8b3a30252c4b9b4967d461de941, type: 3}
   myRenderer: {fileID: 2300000}
-  IsAnimating: 0
+  myMeshFilter: {fileID: 3300000}
+  IsAnimating: 1
   spriteTransform: {fileID: 400002}
   m_UVTileX: 4
   m_UVTileY: 28
@@ -213,7 +202,7 @@ CharacterController:
   m_StepOffset: .300000012
   m_SkinWidth: .0799999982
   m_MinMoveDistance: 0
-  m_Center: {x: 0, y: -.100000001, z: 0}
+  m_Center: {x: 0, y: -.150000006, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

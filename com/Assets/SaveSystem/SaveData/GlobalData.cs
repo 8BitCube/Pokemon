@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [System.Serializable]
 public class GlobalData 
@@ -11,4 +12,7 @@ public class GlobalData
 
 	public float MusicVolume;
 	public float SFXVolume;
+
+	public List<PokemonData> ListOfPokemon;
+
 }

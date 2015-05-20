@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 /// <summary>
@@ -45,6 +46,7 @@ public class FileManager
 			DataManager.globalData.SaveNames = new string[4];
 			DataManager.globalData.MusicVolume = WorldConstants.DEFAULT_MUSIC_V;
 			DataManager.globalData.SFXVolume = WorldConstants.DEFAULT_SFX_V;
+			DataManager.globalData.ListOfPokemon = new List<PokemonData>();
 
 			Serializer.Save<GlobalData>(_path, DataManager.globalData);
 		}

@@ -3,30 +3,40 @@ using System.Collections;
 
 public class Pokemon : CharacterBase
 {
-	public CharacterController CharacterController;
+	public CharacterParameters CurrentParameters { get; set; }
 	
-	private float m_Value;
+	public CharacterParameters WalkParameter;
+	public CharacterParameters RunParameter;
+
+	public int ID;
 
 	public CharacterStats myStats;
 
 	GameObject from;
 	
-	private void Start(){
+	private void Start()
+	{
 		//Ignor collisions with other characters
 		Physics.IgnoreLayerCollision (this.gameObject.layer, this.gameObject.layer);
 		
-		if(CharacterController == null)
-			CharacterController = GetComponent<CharacterController>();
-		
-		PlayerVisuals.IsAnimating = true;
+		CurrentParameters = WalkParameter;
 	}
 
-	public void SetPokemon(int id){
+	public void Update()
+	{
+		if (Movement.MoveVector.x != 0 || Movement.MoveVector.z != 0) 
+			CharacterVisuals.IsAnimating = true;
+		else
+			if(CharacterVisuals.IsAnimating != false)
+		{
+			CharacterVisuals.IsAnimating = false;
+			CharacterVisuals.UpdateIdolImage();
+		}
+	}
 
-		PlayerVisuals.defaultTexture=PokemonDatabase.pokemonSprites[id];
-		PlayerVisuals.myRenderer.material.mainTexture=PlayerVisuals.defaultTexture;
-
-		PlayerVisuals.UpdateImage();
-
+	public void SetPokemon(int aID)
+	{
+		//Go to the image location
+		CharacterVisuals.defaultTexture = Resources.Load(WorldConstants.POKEMON_SPRITE_DIR + aID.ToString("000") + "_0") as Texture2D;
 	}
 }

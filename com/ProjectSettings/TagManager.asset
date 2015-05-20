@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Scripts
-  - TownAmbient
+  - Pokemon
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -15,8 +15,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Character
+  - Solid
   - 
   - 
   - 

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Wander : BaseController 
+public class Wander : CharacterBase 
 {
 	private bool isMoving = false;
 
@@ -38,7 +38,7 @@ public class Wander : BaseController
 		else
 		{
 			transform.LookAt (currentTargetPosition);
-			PlayerMovement.MoveVector = Vector3.forward;
+			Movement.MoveVector = Vector3.forward;
 		}
 	}
 
@@ -49,7 +49,7 @@ public class Wander : BaseController
 	{
 		//Increment the pauseTimer to match the deltaTime
 		pauseTimer += Time.deltaTime;
-		PlayerMovement.MoveVector = Vector3.zero;
+		Movement.MoveVector = Vector3.zero;
 		//When we cap the PauseTimer, reset the value, and change the VelocityState
 		if(pauseTimer > pauseTime)
 		{

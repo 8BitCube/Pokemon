@@ -48,6 +48,9 @@ public class GameManager : MonoBehaviour
 	{
 		DataManager.Save();
 
+		DataManager.globalData.ListOfPokemon.Clear ();
+		LocateCharactersInRange (GameManager.Instance.player.transform.position, 20);
+
 		Serializer.Save<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE, DataManager.globalData);
 		Serializer.Save<LevelData>(DataManager.globalData.SavePathToLoad + WorldConstants.LEVEL_INFO_FILE, DataManager.levelData);
 		Serializer.Save<CharacterData>(DataManager.globalData.SavePathToLoad + WorldConstants.PLAYER_INFO_FILE, DataManager.characterData);
@@ -61,10 +64,50 @@ public class GameManager : MonoBehaviour
 		DataManager.globalData = Serializer.Load<GlobalData>(Application.dataPath + WorldConstants.GLOBAL_INFO_DIR + WorldConstants.GLOBAL_INFO_FILE);
 		DataManager.levelData = Serializer.Load<LevelData>(DataManager.globalData.SavePathToLoad + WorldConstants.LEVEL_INFO_FILE);
 		DataManager.characterData = Serializer.Load<CharacterData>(DataManager.globalData.SavePathToLoad + WorldConstants.PLAYER_INFO_FILE);
+
+
+		//Load and Instantiate all the Pokemon we have saved in a previous save.
+		for(int x = 0; x < DataManager.globalData.ListOfPokemon.Count; x++)
+		{
+			GameObject _obj = Instantiate(Resources.Load("Prefabs/Characters/Pokemon/Pokemon"), new Vector3(0,0,0), Quaternion.identity) as GameObject;
+			_obj.GetComponent<Pokemon>().SetPokemon(DataManager.globalData.ListOfPokemon[x].ID);
+			_obj.name = DataManager.globalData.ListOfPokemon[x].CharacterName;
+
+			_obj.transform.position = new Vector3(DataManager.globalData.ListOfPokemon[x].CharacterPosition.x,
+			                                      DataManager.globalData.ListOfPokemon[x].CharacterPosition.y,
+			                                      DataManager.globalData.ListOfPokemon[x].CharacterPosition.z);
+		}
 		
 		DataManager.Load ();
 	}
 
+	private void LocateCharactersInRange(Vector3 center, float radius)
+	{
+		Collider[] _hitColliders = Physics.OverlapSphere(center, radius);
+
+		Debug.Log (_hitColliders.Length);
+		int i = 0;
+		while (i < _hitColliders.Length) 
+		{
+			//If the _hitCollider[i] is a Pokemon 
+			if(_hitColliders[i].tag == WorldConstants.POKEMON_TAG)
+			{
+				PokemonData pData = new PokemonData();
+				pData.CharacterName = _hitColliders[i].name;
+
+				pData.ID = _hitColliders[i].GetComponent<Pokemon>().ID;
+
+				pData.CharacterPosition.x = _hitColliders[i].transform.position.x;
+				pData.CharacterPosition.y = _hitColliders[i].transform.position.y;
+				pData.CharacterPosition.z = _hitColliders[i].transform.position.z;
+				
+				DataManager.globalData.ListOfPokemon.Add(pData);
+			}
+
+			i++;
+		}
+	}
+		
 	/// <summary>
 	/// Allows the player movement input.
 	/// This class will check other statments in the game.  
