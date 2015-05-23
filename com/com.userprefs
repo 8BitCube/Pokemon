@@ -1,17 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Characters\CharacterVisuals.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Singletons\OptionsManager.cs">
     <Files>
-      <File FileName="Assets\Pokemon\Scripts\Characters\Pokemon\Pokemon.cs" Line="34" Column="4" />
-      <File FileName="Assets\Pokemon\Scripts\Singletons\Static\WorldConstants.cs" Line="10" Column="44" />
-      <File FileName="Assets\Pokemon\Scripts\Singletons\GameManager.cs" Line="65" Column="1" />
-      <File FileName="Assets\Pokemon\Scripts\Characters\CharacterVisuals.cs" Line="101" Column="3" />
-      <File FileName="c:\Users\Mills\Documents\GitHub\Pokemon\com\Assets\Pokemon\Scripts\Map\SpawnArea.cs" Line="55" Column="5" />
-      <File FileName="Assets\Pokemon\Scripts\Characters\Player\Player.cs" Line="12" Column="2" />
-      <File FileName="Assets\SaveSystem\SaveData\NPCData.cs" Line="8" Column="2" />
-      <File FileName="Assets\SaveSystem\SaveData\GlobalData.cs" Line="12" Column="2" />
-      <File FileName="Assets\SaveSystem\SaveData\PokemonData.cs" Line="8" Column="2" />
-      <File FileName="Assets\SaveSystem\SaveData\CharacterData.cs" Line="5" Column="23" />
+      <File FileName="Assets\QualitySettingsMenu\settingsMenu.cs" Line="16" Column="2" />
+      <File FileName="Assets\Pokemon\Scripts\Singletons\OptionsManager.cs" Line="37" Column="48" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -56,6 +56,32 @@ public class FadeManager : MonoBehaviour
 	}
 
 	/// <summary>
+	/// Fades the objects renderer alpha value that is passed in.
+	/// </summary>
+	/// <returns>Null</returns>
+	/// <param name="aFadeType">A fade type.</param>
+	public IEnumerator FadeObject(FadeType aFadeType, Renderer renderer)
+	{
+		float _alphaFadeValue = (aFadeType == FadeType.FadeIn ) ? 1.0f : 0.0f;
+		
+		//Turn on the fadeEffect.
+		UIElementStatic.FadeEffect.gameObject.SetActive (true);
+		
+		//Fade effect, loop until complete
+		while((aFadeType == FadeType.FadeIn ) ? (_alphaFadeValue > 0.0f) : ( _alphaFadeValue < 1.0f))
+		{			
+			_alphaFadeValue += ((aFadeType == FadeType.FadeIn) ? -1 : 1 ) * (1 * (float)fadeTransitionSpeed / 100.0f) * Time.deltaTime;
+			Color c = renderer.material.color;
+			c.a = _alphaFadeValue;
+			renderer.material.color = c;
+			yield return null;
+		}
+
+		//Once completed exit coroutine
+		yield return null;
+	}
+
+	/// <summary>
 	/// Fades the music.
 	/// </summary>
 	/// <returns>The music.</returns>
