@@ -1,9 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Singletons\OptionsManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Pokemon\Scripts\Characters\SpriteMesh.cs">
     <Files>
-      <File FileName="Assets\QualitySettingsMenu\settingsMenu.cs" Line="16" Column="2" />
-      <File FileName="Assets\Pokemon\Scripts\Singletons\OptionsManager.cs" Line="37" Column="48" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\CharacterVisuals.cs" Line="31" Column="16" />
+      <File FileName="Assets\Pokemon\Scripts\Characters\SpriteMesh.cs" Line="177" Column="1" />
+      <File FileName="..\..\..\..\AppData\Roaming\Skype\My Skype Received Files\SpriteMesh.cs" Line="12" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
